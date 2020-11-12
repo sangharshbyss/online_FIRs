@@ -6,7 +6,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 import time
 from sys import argv
-
+import os
 
 # constants
 main_url = r'https://citizen.mahapolice.gov.in/Citizen/MH/PublishedFIRs.aspx'
@@ -14,8 +14,8 @@ main_url = r'https://citizen.mahapolice.gov.in/Citizen/MH/PublishedFIRs.aspx'
 profile = webdriver.FirefoxProfile()
 # set profile for saving directly without pop-up ref -
 # https://stackoverflow.com/a/29777967
-
-
+profile.set_preference("browser.download.panel.shown", False)
+profile.set_preference("browser.helperApps.neverAsk.openFile","application/pdf")
 profile.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/pdf")
 profile.set_preference("browser.download.folderList", 2)
 profile.set_preference("browser.download.dir", '/home/sangharsh/Downloads')
@@ -26,12 +26,27 @@ profile.set_preference("general.useragent.override",
 profile.set_preference("dom.webdriver.enabled", False)
 profile.set_preference('useAutomationExtension', False)
 profile.update_preferences()
+# constants
 driver = webdriver.Firefox(firefox_profile=profile)
-# open the page
-driver.get(main_url)
+# define download directory
+download_directory = r'/home/sangharsh/Downloads'
+# list for number of PoA FIRs & non PoA
+PoA_cases = []
+non_PoA = []
+
 
 # functions
-# 1 select district and enter
+# 1. open url
+
+def open_page():
+    """
+    open page and refresh it. without refreshing it dose not work
+    """
+    driver.get(main_url)
+    driver.refresh()
+
+
+# 2 select district and enter
 def district_selection(name):
     dist_list = Select(driver.find_element_by_css_selector(
         "#ContentPlaceHolder1_ddlDistrict"))
@@ -72,53 +87,82 @@ def view_record():
 # 4. function for click on search
 def search():
     driver.find_element_by_css_selector('#ContentPlaceHolder1_btnSearch').click()
+    time.sleep(5)
 
 
-# 5 check if it has PoA if yes, download
+# 5 check if it has PoA if yes, create a list of how many cases
 def check_the_act():
     # check for PoA in table.
-    #identify table first
+    # identify table first
     table = driver.find_element(By.ID, "ContentPlaceHolder1_gdvDeadBody")
     rows = table.find_elements(By.TAG_NAME, "tr")
+    # iterate over each row
     for row in rows:
         cells = row.find_elements(By.TAG_NAME, "td")
+        # iterate over each cell
         for cell in cells:
             cell_text = cell.text
+            # if the act is found, count it. and take details.
             if "अनुसूचीत जाती आणि अनुसूचीत" in cell_text:
-                # for coming back to this window in future.
-                window_before = driver.current_window_handle
-                window_before_title = driver.title
-                print(window_before_title)
-                row.find_element(By.TAG_NAME, "input").click()
-                print("in here, can you now download")
-                """Changing the handles to access download window
-                ref -
-                https://www.geeksforgeeks.org/
-                how-to-access-popup-login-window-in-selenium-using-python/"""
-                for handle in driver.window_handles:
-                    if handle != window_before:
-                        window_after = handle
-                driver.switch_to.window(window_after)
-                driver.maximize_window()
-                # wait for while
-                time.sleep(5)
+                PoA_cases.append(row.text)
+            else:
+                non_PoA.append(row.text)
+    
 
-                #try clciking dropdown
+
+
+def download_repeat(date, district):
+    i = 0
+    while i <= len(PoA_cases)-1:
+        open_page()
+        time.sleep(1)
+        enter_date(date)
+        district_selection(district)
+        view_record()
+        search()
+        time.sleep(2)
+        table = driver.find_element(By.ID, "ContentPlaceHolder1_gdvDeadBody")
+        rows = table.find_elements(By.TAG_NAME, "tr")
+        main_window = driver.current_window_handle
+        new_list = []
+        for row in rows:
+            cells = row.find_elements(By.TAG_NAME, "td")
+            # iterate over each cell
+            for cell in cells:
+                cell_text = cell.text
+                # if the act is found, count it. and take details.
+                if "अनुसूचीत जाती आणि अनुसूचीत" in cell_text:
+                    download_link = row.find_element(By.TAG_NAME, "input")
+                    new_list.append(download_link)
+                else:
+                    continue
+        new_list[i].click()
+        for handle in driver.window_handles:
+            if handle != main_window:
+                download_window = handle
+                # we are in main window, so go to next window
+                driver.switch_to.window(download_window)
+                driver.maximize_window()
+                time.sleep(4)
+                # try clciking dropdown
                 # take screen shot of the window
-                driver.save_screenshot('/home/sangharsh/Downloads/FIR.png')
+                driver.save_screenshot(
+                    os.path.join(download_directory,
+                                 f'FIR.png'))
                 driver.find_element_by_id(
                     "ReportViewer1_ctl06_ctl04_ctl00_ButtonImgDown").click()
-                
+
                 driver.find_element_by_css_selector(
                     "#ReportViewer1_ctl06_ctl04_ctl00_Menu > div:nth-child(4) > a:nth-child(1)").click()
-                driver.switch_to.window(window_before)
-            else:
-                print("no")
+                # closing down this window will take us automatically to main window
+                driver.close()
+        i += 1
+
 
 
 
 # 6. main code
-driver.get(main_url)
+open_page()
 # call function for entering date, set the date through command line
 enter_date(date=argv[1])
 # call function district, for now its Dhule. will change latter to command line
@@ -131,4 +175,7 @@ search()
 # time.sleep(5)
 # call function check the act and click download
 check_the_act()
-
+if not PoA_cases:
+    print("no PoA case")
+else:
+    download_repeat(argv[1], "DHULE")
