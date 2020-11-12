@@ -13,5 +13,6 @@ def poa_district_summary(poa_summary_list, district, date):
            'Sections']
     directory = '/home/sangharsh/Documents/data/FIR_Data/summary'
     district_data = pd.DataFrame(poa_summary_list, columns=COLUMNS)
-    district_data.to_csv(os.path.join(directory, f'{district}{date}.csv'))
+    with open(os.path.join(directory, f'{district}{date}.csv'), 'w') as f:
+        district_data.to_csv(os.path.join(directory, f'{district}{date}.csv'))
 

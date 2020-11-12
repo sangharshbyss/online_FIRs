@@ -157,20 +157,15 @@ def download_repeat(date, district):
                 driver.switch_to.window(download_window)
 
                 time.sleep(4)
-                # try clciking dropdown
-                # take screen shot of the window
-                driver.save_screenshot(
-                    os.path.join(download_directory,
-                                 f'FIR.png'))
+
                 driver.find_element_by_id(
                     "ReportViewer1_ctl06_ctl04_ctl00_ButtonImgDown").click()
-                time.sleep(3)
                 down_load = driver.find_element_by_css_selector(
                     "#ReportViewer1_ctl06_ctl04_ctl00_Menu > div:nth-child(4) > a:nth-child(1)"
                 )
                 print(down_load.text)
                 down_load.send_keys(Keys.ENTER)
-                time.sleep(3)
+                time.sleep(2)
 
                 driver.close()
         i += 1
