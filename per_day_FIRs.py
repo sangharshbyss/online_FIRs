@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -7,15 +8,19 @@ from selenium.webdriver.support.ui import WebDriverWait
 import time
 from sys import argv
 import os
+from data_summary import poa_district_summary
 
 # constants
+# define download directory
+download_directory = r'/home/sangharsh/Documents/data/FIR_Data'
 main_url = r'https://citizen.mahapolice.gov.in/Citizen/MH/PublishedFIRs.aspx'
 # trying with firefox
 profile = webdriver.FirefoxProfile()
 # set profile for saving directly without pop-up ref -
 # https://stackoverflow.com/a/29777967
 profile.set_preference("browser.download.panel.shown", False)
-profile.set_preference("browser.helperApps.neverAsk.openFile","application/pdf")
+profile.set_preference("browser.download.manager.showWhenStarting", False)
+# profile.set_preference("browser.helperApps.neverAsk.openFile","application/pdf")
 profile.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/pdf")
 profile.set_preference("browser.download.folderList", 2)
 profile.set_preference("browser.download.dir", '/home/sangharsh/Downloads')
@@ -25,14 +30,24 @@ profile.set_preference("general.useragent.override",
                        "Gecko/20100101 Firefox/82.0")
 profile.set_preference("dom.webdriver.enabled", False)
 profile.set_preference('useAutomationExtension', False)
+profile.set_preference("pdfjs.disabled", True)
 profile.update_preferences()
 # constants
 driver = webdriver.Firefox(firefox_profile=profile)
-# define download directory
-download_directory = r'/home/sangharsh/Downloads'
+
 # list for number of PoA FIRs & non PoA
 PoA_cases = []
 non_PoA = []
+# list of districts
+ALL_Districts = ['AHMEDNAGAR', 'AKOLA', 'AMRAVATI CITY', 'AMRAVATI RURAL', 'AURANGABAD CITY',
+                 'AURANGABAD RURAL', 'BEED', 'BHANDARA', 'BRIHAN MUMBAI CITY', 'BULDHANA',
+                 'CHANDRAPUR', 'DHULE', 'GADCHIROLI', 'GONDIA', 'HINGOLI', 'JALGAON', 'JALNA',
+                 'KOLHAPUR', 'LATUR', 'NAGPUR CITY', 'NAGPUR RURAL', 'NANDED', 'NANDURBAR',
+                 'NASHIK CITY', 'NASHIK RURAL', 'NAVI MUMBAI', 'OSMANABAD', 'PALGHAR', 'PARBHANI',
+                 'PIMPRI-CHINCHWAD', 'PUNE CITY', 'PUNE RURAL', 'RAIGAD', 'RAILWAY AURANGABAD',
+                 'RAILWAY MUMBAI', 'RAILWAY NAGPUR', 'RAILWAY PUNE', 'RATNAGIRI', 'SANGLI', 'SATARA',
+                 'SINDHUDURG', 'SOLAPUR CITY', 'SOLAPUR RURAL', 'THANE CITY', 'THANE RURAL', 'WARDHA',
+                 'WASHIM', 'YAVATMAL']
 
 
 # functions
@@ -47,12 +62,12 @@ def open_page():
 
 
 # 2 select district and enter
-def district_selection(name):
+def district_selection(dist_name):
     dist_list = Select(driver.find_element_by_css_selector(
         "#ContentPlaceHolder1_ddlDistrict"))
 
     # command line input
-    dist_list.select_by_visible_text(name)
+    dist_list.select_by_visible_text(dist_name)
     time.sleep(6)
 
 
@@ -107,13 +122,11 @@ def check_the_act():
                 PoA_cases.append(row.text)
             else:
                 non_PoA.append(row.text)
-    
-
 
 
 def download_repeat(date, district):
     i = 0
-    while i <= len(PoA_cases)-1:
+    while i <= len(PoA_cases) - 1:
         open_page()
         time.sleep(1)
         enter_date(date)
@@ -142,7 +155,7 @@ def download_repeat(date, district):
                 download_window = handle
                 # we are in main window, so go to next window
                 driver.switch_to.window(download_window)
-                driver.maximize_window()
+
                 time.sleep(4)
                 # try clciking dropdown
                 # take screen shot of the window
@@ -151,14 +164,16 @@ def download_repeat(date, district):
                                  f'FIR.png'))
                 driver.find_element_by_id(
                     "ReportViewer1_ctl06_ctl04_ctl00_ButtonImgDown").click()
+                time.sleep(3)
+                down_load = driver.find_element_by_css_selector(
+                    "#ReportViewer1_ctl06_ctl04_ctl00_Menu > div:nth-child(4) > a:nth-child(1)"
+                )
+                print(down_load.text)
+                down_load.send_keys(Keys.ENTER)
+                time.sleep(3)
 
-                driver.find_element_by_css_selector(
-                    "#ReportViewer1_ctl06_ctl04_ctl00_Menu > div:nth-child(4) > a:nth-child(1)").click()
-                # closing down this window will take us automatically to main window
                 driver.close()
         i += 1
-
-
 
 
 # 6. main code
@@ -166,16 +181,18 @@ open_page()
 # call function for entering date, set the date through command line
 enter_date(date=argv[1])
 # call function district, for now its Dhule. will change latter to command line
-district_selection(name="DHULE")
-# call the value of records to view @ 50
-view_record()
-# call search
-search()
-# wait for 5 sec
-# time.sleep(5)
-# call function check the act and click download
-check_the_act()
-if not PoA_cases:
-    print("no PoA case")
-else:
-    download_repeat(argv[1], "DHULE")
+for name in ALL_Districts:
+    district_selection(name)
+    # call the value of records to view @ 50
+    view_record()
+    # call search
+    search()
+    # wait for 5 sec
+    # time.sleep(5)
+    # call function check the act and click download
+    check_the_act()
+    poa_district_summary(PoA_cases, name, argv[1])
+    if not PoA_cases:
+        print("no PoA case")
+    else:
+        download_repeat(argv[1], name)
