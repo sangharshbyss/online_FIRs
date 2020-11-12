@@ -12,12 +12,14 @@ from sys import argv
 main_url = r'https://citizen.mahapolice.gov.in/Citizen/MH/PublishedFIRs.aspx'
 # trying with firefox
 profile = webdriver.FirefoxProfile()
-# to go undetected
-profile.set_preference("browser.download.panel.shown", False)
-profile.set_preference("browser.helperApps.neverAsk.openFile","text/csv,application/vnd.ms-excel")
+# set profile for saving directly without pop-up ref -
+# https://stackoverflow.com/a/29777967
+
+
 profile.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/pdf")
 profile.set_preference("browser.download.folderList", 2)
-profile.set_preference("browser.download.dir", "c:\\firefox_downloads\\")
+profile.set_preference("browser.download.dir", '/home/sangharsh/Downloads')
+# to go undetected
 profile.set_preference("general.useragent.override",
                        "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:82.0) "
                        "Gecko/20100101 Firefox/82.0")
@@ -75,21 +77,22 @@ def search():
 # 5 check if it has PoA if yes, download
 def check_the_act():
     # check for PoA in table.
-    rows = driver.find_elements(By.TAG_NAME, "tr")
+    #identify table first
+    table = driver.find_element(By.ID, "ContentPlaceHolder1_gdvDeadBody")
+    rows = table.find_elements(By.TAG_NAME, "tr")
     for row in rows:
         cells = row.find_elements(By.TAG_NAME, "td")
-        print(cells)
-        for cell  in cells:
+        for cell in cells:
             cell_text = cell.text
-            print(cell_text)
-            if "अनुसूचीत जाती आणि अनुसूचीत जमाती" in cell_text:
+            if "अनुसूचीत जाती आणि अनुसूचीत" in cell_text:
                 print(cell_text)
-                submit = row.find_element_by_tag_name("input")
-                submit.click()
                 
-
-
-
+                row.find_element(By.TAG_NAME, "input").click()
+                print("in here, can you now download")
+                time.sleep(3)
+                driver.close()
+            else:
+                print("no")
 
 # 6. main code
 driver.get(main_url)
