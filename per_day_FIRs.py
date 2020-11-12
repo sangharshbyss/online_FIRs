@@ -1,9 +1,6 @@
-from bs4 import BeautifulSoup as BS
 from selenium import webdriver
-
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
-
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
@@ -16,6 +13,11 @@ main_url = r'https://citizen.mahapolice.gov.in/Citizen/MH/PublishedFIRs.aspx'
 # trying with firefox
 profile = webdriver.FirefoxProfile()
 # to go undetected
+profile.set_preference("browser.download.panel.shown", False)
+profile.set_preference("browser.helperApps.neverAsk.openFile","text/csv,application/vnd.ms-excel")
+profile.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/pdf")
+profile.set_preference("browser.download.folderList", 2)
+profile.set_preference("browser.download.dir", "c:\\firefox_downloads\\")
 profile.set_preference("general.useragent.override",
                        "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:82.0) "
                        "Gecko/20100101 Firefox/82.0")
@@ -25,12 +27,6 @@ profile.update_preferences()
 driver = webdriver.Firefox(firefox_profile=profile)
 # open the page
 driver.get(main_url)
-# refresh it to fully update (without this the published FIR page dosen't load fully)
-
-
-# list of districts
-ALL_Districts = ['AURANGABAD CITY']
-
 
 # functions
 # 1 select district and enter
@@ -79,21 +75,20 @@ def search():
 # 5 check if it has PoA if yes, download
 def check_the_act():
     # check for PoA in table.
-    soup = BS(driver.page_source, features="lxml")
-    # get all rows
-    table = soup.find_all(id='ContentPlaceHolder1_gdvDeadBody')
-    rows = soup.find_all('td')
-    print(rows[0])
-    # work on each row
+    rows = driver.find_elements(By.TAG_NAME, "tr")
     for row in rows:
-        cell = row.find_all("td")
-        print(cell)
-        text = cell[0].text
-        print(text)
-        if "अनुसूचीत जाती आणि अनुसूचीत जमाती" in text:
-            print(text)
-            submit = driver.find_elements_by_tag_name("input")
-            submit.click()
+        cells = row.find_elements(By.TAG_NAME, "td")
+        print(cells)
+        for cell  in cells:
+            cell_text = cell.text
+            print(cell_text)
+            if "अनुसूचीत जाती आणि अनुसूचीत जमाती" in cell_text:
+                print(cell_text)
+                submit = row.find_element_by_tag_name("input")
+                submit.click()
+                
+
+
 
 
 # 6. main code
