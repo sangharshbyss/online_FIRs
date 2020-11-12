@@ -85,14 +85,37 @@ def check_the_act():
         for cell in cells:
             cell_text = cell.text
             if "अनुसूचीत जाती आणि अनुसूचीत" in cell_text:
-                print(cell_text)
-                
+                # for coming back to this window in future.
+                window_before = driver.current_window_handle
+                window_before_title = driver.title
+                print(window_before_title)
                 row.find_element(By.TAG_NAME, "input").click()
                 print("in here, can you now download")
-                time.sleep(3)
-                driver.close()
+                """Changing the handles to access download window
+                ref -
+                https://www.geeksforgeeks.org/
+                how-to-access-popup-login-window-in-selenium-using-python/"""
+                for handle in driver.window_handles:
+                    if handle != window_before:
+                        window_after = handle
+                driver.switch_to.window(window_after)
+                driver.maximize_window()
+                # wait for while
+                time.sleep(5)
+
+                #try clciking dropdown
+                # take screen shot of the window
+                driver.save_screenshot('/home/sangharsh/Downloads/FIR.png')
+                driver.find_element_by_id(
+                    "ReportViewer1_ctl06_ctl04_ctl00_ButtonImgDown").click()
+                
+                driver.find_element_by_css_selector(
+                    "#ReportViewer1_ctl06_ctl04_ctl00_Menu > div:nth-child(4) > a:nth-child(1)").click()
+                driver.switch_to.window(window_before)
             else:
                 print("no")
+
+
 
 # 6. main code
 driver.get(main_url)
@@ -105,7 +128,7 @@ view_record()
 # call search
 search()
 # wait for 5 sec
-time.sleep(5)
+# time.sleep(5)
 # call function check the act and click download
 check_the_act()
 
