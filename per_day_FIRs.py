@@ -12,7 +12,8 @@ from data_summary import poa_district_summary
 
 # constants
 # define download directory
-download_directory = r'/home/sangharsh/Documents/data/FIR_Data'
+base_directory = r'/home/sangharsh/Documents/data/FIR_Data'
+download_directory = os.path.join(base_directory, f'{argv[1]}')
 main_url = r'https://citizen.mahapolice.gov.in/Citizen/MH/PublishedFIRs.aspx'
 # trying with firefox
 profile = webdriver.FirefoxProfile()
@@ -23,7 +24,7 @@ profile.set_preference("browser.download.manager.showWhenStarting", False)
 # profile.set_preference("browser.helperApps.neverAsk.openFile","application/pdf")
 profile.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/pdf")
 profile.set_preference("browser.download.folderList", 2)
-profile.set_preference("browser.download.dir", '/home/sangharsh/Downloads')
+profile.set_preference("browser.download.dir", download_directory)
 # to go undetected
 profile.set_preference("general.useragent.override",
                        "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:82.0) "
@@ -166,8 +167,8 @@ def download_repeat(date, district):
                 print(down_load.text)
                 down_load.send_keys(Keys.ENTER)
                 time.sleep(2)
-
                 driver.close()
+                driver.switch_to.window(main_window)
         i += 1
 
 
@@ -177,6 +178,7 @@ open_page()
 enter_date(date=argv[1])
 # call function district, for now its Dhule. will change latter to command line
 for name in ALL_Districts:
+
     district_selection(name)
     # call the value of records to view @ 50
     view_record()
@@ -188,6 +190,6 @@ for name in ALL_Districts:
     check_the_act()
     poa_district_summary(PoA_cases, name, argv[1])
     if not PoA_cases:
-        print("no PoA case")
+        print(f"no PoA case {name}")
     else:
         download_repeat(argv[1], name)
