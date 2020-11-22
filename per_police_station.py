@@ -199,8 +199,8 @@ with open(os.path.join(
     file.write('bug report \n\n')
     file.close()
 
-for name in ALL_Districts:
-    time.sleep(60)
+for name in ALL_Districts[1::]:
+    time.sleep(20)
     try:
         district_dictionary = {"Unite": '', "Police_Station": '',
                                "Number of Records": '', "PoA Cases": '',
@@ -255,7 +255,7 @@ for name in ALL_Districts:
     non_poa_dictionary = []
     status = []
     for police in names_police:
-        time.sleep(20)
+        time.sleep(8)
         try:
             profile = webdriver.FirefoxProfile()
             # set profile for saving directly without pop-up ref -
@@ -320,7 +320,7 @@ for name in ALL_Districts:
             poa_dictionary.append("REPEAT")
             non_poa_dictionary.append("REPEAT")
             status.append("REPEAT")
-            time.sleep(80)
+            time.sleep(360)
             break
         print(f'{name} {police} {record}')
         if int(record) > 0:
