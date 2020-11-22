@@ -3,24 +3,23 @@ Check if every police station has uploaded at least one FIR/3months.
 Draw the list of police stations who have not done so.
 """
 
-import os
-import time
-from builtins import ConnectionError, ConnectionRefusedError
-from sys import argv
-
-import pandas as pd
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException, \
     TimeoutException, \
     WebDriverException, \
     ElementNotInteractableException
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support import expected_conditions as ec
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.support.ui import WebDriverWait
-from urllib3.exceptions import MaxRetryError, NewConnectionError
+from urllib3.exceptions import MaxRetryError, NewConnectionError, ConnectionError
+from builtins import ConnectionError, ConnectionRefusedError
+from sys import argv
+import time
+import os
+import pandas as pd
 
 # constants
 # define download directory
@@ -35,7 +34,14 @@ main_url = r'https://citizen.mahapolice.gov.in/Citizen/MH/PublishedFIRs.aspx'
 # list for number of PoA FIRs & non PoA
 
 # list of districts
-ALL_Districts = ['WARDHA',
+ALL_Districts = ['AHMEDNAGAR', 'AKOLA', 'AMRAVATI CITY', 'AMRAVATI RURAL', 'AURANGABAD CITY',
+                 'AURANGABAD RURAL', 'BEED', 'BHANDARA', 'BRIHAN MUMBAI CITY', 'BULDHANA',
+                 'CHANDRAPUR', 'DHULE', 'GADCHIROLI', 'GONDIA', 'HINGOLI', 'JALGAON', 'JALNA',
+                 'KOLHAPUR', 'LATUR', 'NAGPUR CITY', 'NAGPUR RURAL', 'NANDED', 'NANDURBAR',
+                 'NASHIK CITY', 'NASHIK RURAL', 'NAVI MUMBAI', 'OSMANABAD', 'PALGHAR', 'PARBHANI',
+                 'PIMPRI-CHINCHWAD', 'PUNE CITY', 'PUNE RURAL', 'RAIGAD', 'RAILWAY AURANGABAD',
+                 'RAILWAY MUMBAI', 'RAILWAY NAGPUR', 'RAILWAY PUNE', 'RATNAGIRI', 'SANGLI', 'SATARA',
+                 'SINDHUDURG', 'SOLAPUR CITY', 'SOLAPUR RURAL', 'THANE CITY', 'THANE RURAL', 'WARDHA',
                  'WASHIM', 'YAVATMAL']
 
 
@@ -194,7 +200,7 @@ with open(os.path.join(
     file.close()
 
 for name in ALL_Districts:
-    time.sleep(120)
+    time.sleep(60)
     try:
         district_dictionary = {"Unite": '', "Police_Station": '',
                                "Number of Records": '', "PoA Cases": '',
@@ -314,8 +320,8 @@ for name in ALL_Districts:
             poa_dictionary.append("REPEAT")
             non_poa_dictionary.append("REPEAT")
             status.append("REPEAT")
+            time.sleep(80)
             break
-
         print(f'{name} {police} {record}')
         if int(record) > 0:
             with open(os.path.join(
