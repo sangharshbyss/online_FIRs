@@ -4,6 +4,7 @@ Draw the list of police stations who have not done so.
 """
 
 from selenium import webdriver
+from selenium.webdriver.common.proxy import Proxy, ProxyType
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
@@ -14,7 +15,7 @@ from selenium.common.exceptions import NoSuchElementException, \
     TimeoutException, \
     WebDriverException, \
     ElementNotInteractableException
-from urllib3.exceptions import MaxRetryError, NewConnectionError, ConnectionError
+from urllib3.exceptions import MaxRetryError, NewConnectionError
 from builtins import ConnectionError, ConnectionRefusedError
 from sys import argv
 import time
@@ -23,7 +24,7 @@ import pandas as pd
 
 # constants
 # define download directory
-base_directory = r'/home/sangharsh/Documents/PoA/data/FIR'
+base_directory = r'/home/sangharsh/Documents/PoA/data/FIR/November'
 download_directory = os.path.join(base_directory, "copies")
 main_url = r'https://citizen.mahapolice.gov.in/Citizen/MH/PublishedFIRs.aspx'
 # trying with firefox
@@ -44,6 +45,7 @@ ALL_Districts = ['AHMEDNAGAR', 'AKOLA', 'AMRAVATI CITY', 'AMRAVATI RURAL', 'AURA
                  'SINDHUDURG', 'SOLAPUR CITY', 'SOLAPUR RURAL', 'THANE CITY', 'THANE RURAL', 'WARDHA',
                  'WASHIM', 'YAVATMAL']
 
+print(list(enumerate(ALL_Districts)))
 
 # functions
 # 1. open url
@@ -199,12 +201,13 @@ with open(os.path.join(
     file.write('bug report \n\n')
     file.close()
 
-for name in ALL_Districts[1::]:
+for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
     time.sleep(20)
     try:
         district_dictionary = {"Unite": '', "Police_Station": '',
                                "Number of Records": '', "PoA Cases": '',
                                "Other Cases": ''}
+
         profile = webdriver.FirefoxProfile()
         # set profile for saving directly without pop-up ref -
         # https://stackoverflow.com/a/29777967
@@ -222,7 +225,17 @@ for name in ALL_Districts[1::]:
         profile.set_preference('useAutomationExtension', False)
         profile.set_preference("pdfjs.disabled", True)
         profile.update_preferences()
-        driver = webdriver.Firefox(firefox_profile=profile)
+        # change IP
+        myProxy = "124.240.187.80:82"
+
+        proxy = Proxy({
+            'proxyType': ProxyType.MANUAL,
+            'httpProxy': myProxy,
+            'ftpProxy': myProxy,
+            'sslProxy': myProxy,
+            'noProxy': '' # set this value as desired
+            })
+        driver = webdriver.Firefox(firefox_profile=profile, proxy=proxy)
         open_page()
     except (NoSuchElementException,
             WebDriverException,
@@ -241,12 +254,33 @@ for name in ALL_Districts[1::]:
         df.to_csv(
             os.path.join(base_directory, "summary", f'{name} _{argv[1]} to {argv[2]}.csv'))
         time.sleep(60)
+        driver.quit()
         continue
     # call function for entering date, set the date through command line
     enter_date(date1=argv[1], date2=argv[2])
     # call function district, for now its Dhule. will change latter to command line
     district_selection(name)
-    names_police = police_stations()
+    try:
+        names_police = police_stations()
+    except (NoSuchElementException,
+            WebDriverException,
+            TimeoutException, ConnectionRefusedError,
+            MaxRetryError, ConnectionError, NewConnectionError):
+        print(f'bug @ {name}')
+        with open(os.path.join(download_directory, "bug" f'bug_report_0.txt'), 'a') as file:
+            file.write(f'{name}, "-" \n')
+        district_dictionary = {"Unite": name,
+                               "Police_Station": "bug",
+                               "Number of Records": "bug",
+                               "PoA Cases": "BLANK",
+                               "Other Cases": "BLANK"}
+        df = pd.DataFrame(
+            {key: pd.Series(value) for key, value in district_dictionary.items()})
+        df.to_csv(
+            os.path.join(base_directory, "summary", f'{name} _{argv[1]} to {argv[2]}.csv'))
+        time.sleep(60)
+        continue
+
     driver.quit()
     # creation of list. This list will be converted to dictionary to write to csv
     police_dictionary = []
@@ -268,8 +302,8 @@ for name in ALL_Districts[1::]:
             profile.set_preference("browser.download.dir", download_directory)
             # to go undetected
             profile.set_preference("general.useragent.override",
-                                   "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:82.0) "
-                                   "Gecko/20100101 Firefox/82.0")
+                                   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/605.1.15 "
+                                   "(KHTML, like Gecko) Version/11.1.2 Safari/605.1.15")
             profile.set_preference("dom.webdriver.enabled", False)
             profile.set_preference('useAutomationExtension', False)
             profile.set_preference("pdfjs.disabled", True)
@@ -284,9 +318,9 @@ for name in ALL_Districts[1::]:
 
             select_police_station(police)
         except (NoSuchElementException,
-            WebDriverException,
-            TimeoutException, ConnectionRefusedError,
-            MaxRetryError, ConnectionError, NewConnectionError):
+                WebDriverException,
+                TimeoutException, ConnectionRefusedError,
+                MaxRetryError, ConnectionError, NewConnectionError):
             print(f' bug {name}, {police}')
             with open(os.path.join(
                     download_directory,
@@ -320,7 +354,7 @@ for name in ALL_Districts[1::]:
             poa_dictionary.append("REPEAT")
             non_poa_dictionary.append("REPEAT")
             status.append("REPEAT")
-            time.sleep(360)
+            time.sleep(60)
             break
         print(f'{name} {police} {record}')
         if int(record) > 0:
