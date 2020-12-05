@@ -17,6 +17,7 @@ from selenium.common.exceptions import NoSuchElementException, \
     ElementNotInteractableException
 from urllib3.exceptions import MaxRetryError, NewConnectionError
 from builtins import ConnectionError, ConnectionRefusedError
+from proxies import list_of_proxies
 from sys import argv
 import time
 import os
@@ -202,46 +203,46 @@ with open(os.path.join(
     file.close()
 
 for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
-    time.sleep(20)
+    time.sleep(10)
+
+    district_dictionary = {"Unite": '', "Police_Station": '',
+                           "Number of Records": '', "PoA Cases": '',
+                           "Other Cases": ''}
+
+    profile = webdriver.FirefoxProfile()
+    # set profile for saving directly without pop-up ref -
+    # https://stackoverflow.com/a/29777967
+    profile.set_preference("browser.download.panel.shown", False)
+    profile.set_preference("browser.download.manager.showWhenStarting", False)
+    # profile.set_preference("browser.helperApps.neverAsk.openFile","application/pdf")
+    profile.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/pdf")
+    profile.set_preference("browser.download.folderList", 2)
+    profile.set_preference("browser.download.dir", download_directory)
+    # to go undetected
+    profile.set_preference("general.useragent.override",
+                           "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:82.0) "
+                           "Gecko/20100101 Firefox/82.0")
+    profile.set_preference("dom.webdriver.enabled", False)
+    profile.set_preference('useAutomationExtension', False)
+    profile.set_preference("pdfjs.disabled", True)
+    profile.update_preferences()
+    # change IP
+    myProxy = list_of_proxies()
+    proxy = Proxy({
+        'proxyType': ProxyType.MANUAL,
+        'httpProxy': myProxy[ALL_Districts.index(name)],
+        'ftpProxy': myProxy[ALL_Districts.index(name)],
+        'sslProxy': myProxy[ALL_Districts.index(name)],
+        'noProxy': '' # set this value as desired
+        })
     try:
-        district_dictionary = {"Unite": '', "Police_Station": '',
-                               "Number of Records": '', "PoA Cases": '',
-                               "Other Cases": ''}
-
-        profile = webdriver.FirefoxProfile()
-        # set profile for saving directly without pop-up ref -
-        # https://stackoverflow.com/a/29777967
-        profile.set_preference("browser.download.panel.shown", False)
-        profile.set_preference("browser.download.manager.showWhenStarting", False)
-        # profile.set_preference("browser.helperApps.neverAsk.openFile","application/pdf")
-        profile.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/pdf")
-        profile.set_preference("browser.download.folderList", 2)
-        profile.set_preference("browser.download.dir", download_directory)
-        # to go undetected
-        profile.set_preference("general.useragent.override",
-                               "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:82.0) "
-                               "Gecko/20100101 Firefox/82.0")
-        profile.set_preference("dom.webdriver.enabled", False)
-        profile.set_preference('useAutomationExtension', False)
-        profile.set_preference("pdfjs.disabled", True)
-        profile.update_preferences()
-        # change IP
-        myProxy = "124.240.187.80:82"
-
-        proxy = Proxy({
-            'proxyType': ProxyType.MANUAL,
-            'httpProxy': myProxy,
-            'ftpProxy': myProxy,
-            'sslProxy': myProxy,
-            'noProxy': '' # set this value as desired
-            })
         driver = webdriver.Firefox(firefox_profile=profile, proxy=proxy)
         open_page()
     except (NoSuchElementException,
             WebDriverException,
             TimeoutException, ConnectionRefusedError,
             MaxRetryError, ConnectionError, NewConnectionError):
-        print(f'bug @ {name}')
+        print(f'bug @ {name}, driver did not open')
         with open(os.path.join(download_directory, "bug" f'bug_report_0.txt'), 'a') as file:
             file.write(f'{name}, "-" \n')
         district_dictionary = {"Unite": name,
@@ -253,8 +254,8 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
             {key: pd.Series(value) for key, value in district_dictionary.items()})
         df.to_csv(
             os.path.join(base_directory, "summary", f'{name} _{argv[1]} to {argv[2]}.csv'))
-        time.sleep(60)
-        driver.quit()
+        time.sleep(20)
+
         continue
     # call function for entering date, set the date through command line
     enter_date(date1=argv[1], date2=argv[2])
@@ -308,6 +309,14 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
             profile.set_preference('useAutomationExtension', False)
             profile.set_preference("pdfjs.disabled", True)
             profile.update_preferences()
+            myProxy = list_of_proxies()
+            proxy = Proxy({
+                'proxyType': ProxyType.MANUAL,
+                'httpProxy': myProxy[names_police.index(police)],
+                'ftpProxy': myProxy[names_police.index(police)],
+                'sslProxy': myProxy[names_police.index(police)],
+                'noProxy': '' # set this value as desired
+            })
             driver = webdriver.Firefox(firefox_profile=profile)
             open_page()
             # call function for entering date, set the date through command line
