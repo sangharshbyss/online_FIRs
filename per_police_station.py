@@ -26,7 +26,10 @@ import pandas as pd
 # constants
 # define download directory
 base_directory = r'/home/sangharsh/Documents/PoA/data/FIR/November'
-download_directory = os.path.join(base_directory, "copies")
+download_directory = os.path.join(base_directory, "copies", f'{argv[1]} _ {argv[2]}')
+if not download_directory:
+    os.mkdir(download_directory)
+
 main_url = r'https://citizen.mahapolice.gov.in/Citizen/MH/PublishedFIRs.aspx'
 # trying with firefox
 
@@ -47,6 +50,7 @@ ALL_Districts = ['AHMEDNAGAR', 'AKOLA', 'AMRAVATI CITY', 'AMRAVATI RURAL', 'AURA
                  'WASHIM', 'YAVATMAL']
 
 print(list(enumerate(ALL_Districts)))
+
 
 # functions
 # 1. open url
@@ -233,8 +237,8 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
         'httpProxy': myProxy[ALL_Districts.index(name)],
         'ftpProxy': myProxy[ALL_Districts.index(name)],
         'sslProxy': myProxy[ALL_Districts.index(name)],
-        'noProxy': '' # set this value as desired
-        })
+        'noProxy': ''  # set this value as desired
+    })
     try:
         driver = webdriver.Firefox(firefox_profile=profile, proxy=proxy)
         open_page()
@@ -267,7 +271,7 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
             WebDriverException,
             TimeoutException, ConnectionRefusedError,
             MaxRetryError, ConnectionError, NewConnectionError):
-        print(f'bug @ {name}')
+        print(f'police stations not loaded @ {name}')
         with open(os.path.join(download_directory, "bug" f'bug_report_0.txt'), 'a') as file:
             file.write(f'{name}, "-" \n')
         district_dictionary = {"Unite": name,
@@ -315,7 +319,7 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
                 'httpProxy': myProxy[names_police.index(police)],
                 'ftpProxy': myProxy[names_police.index(police)],
                 'sslProxy': myProxy[names_police.index(police)],
-                'noProxy': '' # set this value as desired
+                'noProxy': ''  # set this value as desired
             })
             driver = webdriver.Firefox(firefox_profile=profile)
             open_page()
