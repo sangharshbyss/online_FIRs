@@ -19,7 +19,7 @@ from selenium.webdriver.common.proxy import Proxy, ProxyType
 from urllib3.exceptions import MaxRetryError, NewConnectionError
 
 import FIR_modules
-from proxies import list_of_proxies
+from proxies2 import list_of_proxies
 
 # constants
 # define download directory
@@ -60,7 +60,6 @@ mha_poa_cases = []
 
 mha_downloaded = []
 for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
-    time.sleep(8)
 
     district_dictionary = {"Unit": '', "Police_Station": '',
                            "Number of Records": '', "PoA Cases": '',
@@ -110,7 +109,7 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
             {key: pd.Series(value) for key, value in district_dictionary.items()})
         df.to_csv(
             os.path.join(base_directory, "summary", f'{name} _{argv[1]} to {argv[2]}.csv'))
-        time.sleep(20)
+        time.sleep(5)
 
         continue
     # call function for entering date, set the date through command line
@@ -134,7 +133,7 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
             {key: pd.Series(value) for key, value in district_dictionary.items()})
         df.to_csv(
             os.path.join(base_directory, "summary", f'{name} _{argv[1]} to {argv[2]}.csv'))
-        time.sleep(60)
+        time.sleep(10)
         continue
 
     driver.quit()
@@ -143,8 +142,6 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
     total_records_dictionary = []
     poa_dictionary = []
     for police in names_police:
-        time.sleep(4)
-
         status = []
         try:
             profile = webdriver.FirefoxProfile()
@@ -193,7 +190,7 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
 
             status.append("bug")
             driver.quit()
-            time.sleep(70)
+            time.sleep(10)
             continue
         # call the value of records to view @ 50
         FIR_modules.view_record(driver)
@@ -211,7 +208,7 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
             poa_dictionary.append("REPEAT")
 
             status.append("REPEAT")
-            time.sleep(60)
+            time.sleep(5)
             break
         print(f'{name} {police} {record}')
         if int(record) > 0:
@@ -271,7 +268,7 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
 
                 status.append("failed")
                 driver.quit()
-                time.sleep(30)
+                time.sleep(5)
                 continue
             except ElementNotInteractableException:
                 print("Element not interactable")
@@ -281,7 +278,7 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
 
                 status.append("failed")
                 driver.quit()
-                time.sleep(30)
+                time.sleep(5)
                 continue
     district_dictionary = {"Unit": name,
                            "Police_Station": police_dictionary,
