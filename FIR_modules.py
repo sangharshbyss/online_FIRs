@@ -8,8 +8,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 
 """ 
-2. function for date to-from. same as in only details of one data will be collected.
-this function needs ActionChains otherwise the dates are not getting entered. 
+2. function for date to-from. 
 date will be entered through command line
 """
 
@@ -130,7 +129,8 @@ def download_repeat(some_list, driver):
         driver.find_element_by_id(
             "ReportViewer1_ctl06_ctl04_ctl00_ButtonImgDown").click()
         down_load = driver.find_element_by_css_selector(
-            "#ReportViewer1_ctl06_ctl04_ctl00_Menu > div:nth-child(4) > a:nth-child(1)"
+            "#ReportViewer1_ctl06_ctl04_ctl00_Menu > div:nth-child(4) "
+            "> a:nth-child(1)"
         )
         time.sleep(2)
         down_load.send_keys(Keys.ENTER)
@@ -139,4 +139,21 @@ def download_repeat(some_list, driver):
         print('finished')
         driver.switch_to.window(main_window)
         i += 1
-    driver.quit()
+
+
+
+def second_page(driver):
+    p2 = driver.find_element_by_xpath(
+        '/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table/'
+        'tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody/tr[52]'
+        '/td/table/tbody/tr/td[2]/a')
+    p2.click()
+
+
+def third_page(driver):
+    p3 = driver.find_element_by_xpath(
+        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/"
+        "table/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table"
+        "/tbody/tr[12]/td/table/tbody/tr/td[3]/a"
+    )
+    p3.click()
