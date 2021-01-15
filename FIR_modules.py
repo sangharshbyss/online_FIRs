@@ -98,7 +98,15 @@ def check_the_act(driver):
     return poa_list
 
 
-def download_repeat(some_list, driver):
+def download_repeat(some_list, driver,
+                    poa_dir_district,
+                    poa_dir_police,
+                    poa_dir_year,
+                    poa_dir_FIR,
+                    poa_dir_date,
+                    poa_dir_sec):
+
+
     i = 0
     while i <= len(some_list) - 1:
         time.sleep(2)
@@ -115,6 +123,12 @@ def download_repeat(some_list, driver):
                 if "अनुसूचीत जाती आणि अनुसूचीत" in cell_text:
                     download_link = row.find_element(By.TAG_NAME, "input")
                     new_list.append(download_link)
+                    poa_dir_district.append(cells[2].text)
+                    poa_dir_police.append(cells[3].text)
+                    poa_dir_year.append(cells[4].text)
+                    poa_dir_FIR.append(cells[5].text)
+                    poa_dir_date.append(cells[6].text)
+                    poa_dir_sec.append(cells[8].text)
                 else:
                     continue
         print('downloading...')
@@ -154,6 +168,6 @@ def third_page(driver):
     p3 = driver.find_element_by_xpath(
         "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/"
         "table/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table"
-        "/tbody/tr[12]/td/table/tbody/tr/td[3]/a"
+        "/tbody/tr[52]/td/table/tbody/tr/td[3]/a"
     )
     p3.click()
