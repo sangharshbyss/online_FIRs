@@ -20,7 +20,7 @@ from selenium.webdriver.common.proxy import Proxy, ProxyType
 from urllib3.exceptions import MaxRetryError, NewConnectionError
 
 import FIR_modules
-from proxies2 import list_of_proxies
+from proxies4 import list_of_proxies
 
 # constants
 # define download directory
@@ -52,7 +52,7 @@ def open_page():
     driver.get(main_url)
     driver.refresh()
 
-
+# lists for taking cvs output
 poa_dir_district = []
 poa_dir_police = []
 poa_dir_year = []
@@ -88,7 +88,7 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
     profile.set_preference("pdfjs.disabled", True)
     profile.update_preferences()
     # change IP
-    myProxy, fake = list_of_proxies()
+    myProxy = list_of_proxies()
     proxy = Proxy({
         'proxyType': ProxyType.MANUAL,
         'httpProxy': myProxy[ALL_Districts.index(name)],
@@ -104,6 +104,8 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
             TimeoutException, ConnectionRefusedError,
             MaxRetryError, ConnectionError, NewConnectionError):
         print(f'bug @ {name}, driver did not open')
+    except:
+        continue
 
         district_dictionary = {"Unit": name,
                                "Police_Station": "bug",
@@ -198,6 +200,8 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
             driver.quit()
             time.sleep(5)
             continue
+        except:
+            continue
     if int(record) > 50:
         FIR_modules.second_page(driver)
     else:
@@ -246,6 +250,8 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
             mha_downloaded.append("failed")
             driver.quit()
             time.sleep(5)
+            continue
+        except:
             continue
     if int(record) > 100:
         print('going to page 3')
@@ -300,6 +306,8 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
             driver.quit()
             time.sleep(5)
             continue
+        except:
+            continue
 
     driver.quit()
 mha_records = {"Date": mha_date,
@@ -319,4 +327,4 @@ df = pd.DataFrame(
     {key: pd.Series(value) for key, value in poa_dir.items()})
 print(df)
 df.to_csv(
-    os.path.join(base_directory, "poa_summary", f'FIRs_from{argv[1]} to {argv[2]}.csv'))
+    os.path.join(base_directory, "poa_summary", f'FIRs_from_{argv[1]} to {argv[2]}.csv'))
