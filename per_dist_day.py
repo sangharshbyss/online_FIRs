@@ -137,13 +137,13 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
         break
     print(f'{name}{record}')
     if int(record) > 0:
-        print('found')
+        print('record found')
     else:
         mha_date.append(argv[1])
         mha_unite_list.append(name)
         mha_number_of_records.append(record)
-        mha_poa_cases.append("not applicable")
-        mha_downloaded.append("not applicable")
+        mha_poa_cases.append("0")
+        mha_downloaded.append("0")
         driver.quit()
         continue
     poa_cases = FIR_modules.check_the_act(driver)
@@ -194,8 +194,8 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
     if not poa_cases:
         print('no poa. go to next page')
         mha_date.append(argv[1])
-        mha_unite_list.append(name)
-        mha_number_of_records.append(record)
+        mha_unite_list.append("-")
+        mha_number_of_records.append("-")
         mha_poa_cases.append(0)
         mha_downloaded.append("0")
 
@@ -203,17 +203,17 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
         try:
             FIR_modules.download_repeat(poa_cases, driver)
             mha_date.append(argv[1])
-            mha_unite_list.append(name)
-            mha_number_of_records.append(record)
+            mha_unite_list.append("-")
+            mha_number_of_records.append("-")
             mha_poa_cases.append(len(poa_cases))
             mha_downloaded.append("done")
         except (WebDriverException, TimeoutException,
                 NoSuchElementException):
             print("download failed")
             mha_date.append(argv[1])
-            mha_unite_list.append(name)
-            mha_number_of_records.append(record)
-            mha_poa_cases.append(len(poa_cases))
+            mha_unite_list.append("-")
+            mha_number_of_records.append("-")
+            mha_poa_cases.append(len("-"))
             mha_downloaded.append("failed")
             driver.quit()
             time.sleep(5)
