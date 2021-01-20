@@ -178,7 +178,7 @@ def download_repeat(date, district, some_list):
                 down_load = driver.find_element_by_css_selector(
                     "#ReportViewer1_ctl06_ctl04_ctl00_Menu > div:nth-child(4) > a:nth-child(1)"
                 )
-                print(down_load.text)
+                print(f'{district} in {down_load.text}')
                 down_load.send_keys(Keys.ENTER)
                 time.sleep(2)
                 driver.close()
