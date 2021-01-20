@@ -37,7 +37,6 @@ profile.update_preferences()
 driver = webdriver.Firefox(firefox_profile=profile)
 
 # list for number of PoA FIRs & non PoA
-PoA_cases = []
 non_PoA = []
 # list of districts
 ALL_Districts = ['AHMEDNAGAR', 'AKOLA', 'AMRAVATI CITY', 'AMRAVATI RURAL', 'AURANGABAD CITY',
@@ -107,9 +106,10 @@ def search():
 
 
 # 5 check if it has PoA if yes, create a list of how many cases
-def check_the_act():
+def check_the_act(some_list):
     # check for PoA in table.
     # identify table first
+    
     table = driver.find_element(By.ID, "ContentPlaceHolder1_gdvDeadBody")
     rows = table.find_elements(By.TAG_NAME, "tr")
     # iterate over each row
@@ -120,14 +120,14 @@ def check_the_act():
             cell_text = cell.text
             # if the act is found, count it. and take details.
             if "अनुसूचीत जाती आणि अनुसूचीत" in cell_text:
-                PoA_cases.append(row.text)
+                some_list.append(row.text)
             else:
                 non_PoA.append(row.text)
 
 
-def download_repeat(date, district):
+def download_repeat(date, district, some_list):
     i = 0
-    while i <= len(PoA_cases) - 1:
+    while i <= len(some_list) - 1:
         open_page()
         time.sleep(1)
         enter_date(date)
@@ -173,12 +173,13 @@ def download_repeat(date, district):
 
 
 # 6. main code
+
 open_page()
 # call function for entering date, set the date through command line
 enter_date(date=argv[1])
-# call function district, for now its Dhule. will change latter to command line
 for name in ALL_Districts:
-
+    poa_cases= []
+    # call function district, for now its Dhule. will change latter to command line
     district_selection(name)
     # call the value of records to view @ 50
     view_record()
@@ -187,9 +188,9 @@ for name in ALL_Districts:
     # wait for 5 sec
     # time.sleep(5)
     # call function check the act and click download
-    check_the_act()
-    poa_district_summary(PoA_cases, name, argv[1])
-    if not PoA_cases:
+    check_the_act(some_list=poa_cases)
+    poa_district_summary(poa_cases, name, argv[1])
+    if not poa_cases:
         print(f"no PoA case {name}")
     else:
-        download_repeat(argv[1], name)
+        download_repeat(argv[1], name, poa_cases)
