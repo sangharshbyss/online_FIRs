@@ -75,7 +75,12 @@ def number_of_records(driver):
 
 
 # 5 check if it has PoA if yes, create a list of how many cases
-def check_the_act(driver):
+def check_the_act(driver, poa_dir_district,
+                  poa_dir_police,
+                  poa_dir_year,
+                  poa_dir_FIR,
+                  poa_dir_date,
+                  poa_dir_sec):
     poa_list = []
 
     # check for PoA in table.
@@ -94,19 +99,18 @@ def check_the_act(driver):
             # if the act is found, count it. and take details.
             if "अनुसूचीत जाती आणि अनुसूचीत" in cell_text:
                 poa_list.append(row.text)
+                poa_dir_district.append(cells[2].text)
+                poa_dir_police.append(cells[3].text)
+                poa_dir_year.append(cells[4].text)
+                poa_dir_FIR.append(cells[5].text)
+                poa_dir_date.append(cells[6].text)
+                poa_dir_sec.append(cells[8].text)
 
     return poa_list
 
 
 def download_repeat(some_list, driver,
-                    poa_dir_district,
-                    poa_dir_police,
-                    poa_dir_year,
-                    poa_dir_FIR,
-                    poa_dir_date,
-                    poa_dir_sec):
-
-
+                    ):
     i = 0
     while i <= len(some_list) - 1:
         time.sleep(2)
@@ -123,12 +127,7 @@ def download_repeat(some_list, driver,
                 if "अनुसूचीत जाती आणि अनुसूचीत" in cell_text:
                     download_link = row.find_element(By.TAG_NAME, "input")
                     new_list.append(download_link)
-                    poa_dir_district.append(cells[2].text)
-                    poa_dir_police.append(cells[3].text)
-                    poa_dir_year.append(cells[4].text)
-                    poa_dir_FIR.append(cells[5].text)
-                    poa_dir_date.append(cells[6].text)
-                    poa_dir_sec.append(cells[8].text)
+
                 else:
                     continue
         print('downloading...')
@@ -153,7 +152,6 @@ def download_repeat(some_list, driver,
         print('finished')
         driver.switch_to.window(main_window)
         i += 1
-
 
 
 def second_page(driver):
