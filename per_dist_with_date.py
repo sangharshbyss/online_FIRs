@@ -20,7 +20,7 @@ from selenium.webdriver.common.proxy import Proxy, ProxyType
 from urllib3.exceptions import MaxRetryError, NewConnectionError
 
 import FIR_modules
-from proxies4 import list_of_proxies
+from proxies3 import list_of_proxies
 
 # constants
 # define download directory
@@ -51,6 +51,7 @@ def open_page():
     """
     driver.get(main_url)
     driver.refresh()
+
 
 # lists for taking cvs output
 poa_dir_district = []
@@ -104,21 +105,8 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
             TimeoutException, ConnectionRefusedError,
             MaxRetryError, ConnectionError, NewConnectionError):
         print(f'bug @ {name}, driver did not open')
-    except:
         continue
 
-        district_dictionary = {"Unit": name,
-                               "Police_Station": "bug",
-                               "Number of Records": "bug",
-                               "PoA Cases": "BLANK",
-                               }
-        df = pd.DataFrame(
-            {key: pd.Series(value) for key, value in district_dictionary.items()})
-        df.to_csv(
-            os.path.join(base_directory, "summary", f'{name} _{argv[1]} to {argv[2]}.csv'))
-        time.sleep(5)
-
-        continue
     # call function for entering date, set the date through command line
     FIR_modules.enter_date(date1=argv[1], date2=argv[2], driver=driver)
     # call function district, for now its Dhule. will change latter to command line
@@ -137,7 +125,12 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
               f'{name} @ {name} \n\n\n')
 
         driver.quit()
-        poa_cases, non_poa_cases = FIR_modules.check_the_act(driver)
+        poa_cases, non_poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                  poa_dir_police,
+                  poa_dir_year,
+                  poa_dir_FIR,
+                  poa_dir_date,
+                  poa_dir_sec)
 
         total_records_dictionary.append("REPEAT")
         poa_dictionary.append("REPEAT")
@@ -155,7 +148,12 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
         mha_downloaded.append("0")
         driver.quit()
         continue
-    poa_cases = FIR_modules.check_the_act(driver)
+    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                  poa_dir_police,
+                  poa_dir_year,
+                  poa_dir_FIR,
+                  poa_dir_date,
+                  poa_dir_sec)
     if not poa_cases:
         print('no poa. go to next page')
         mha_date.append(argv[1])
@@ -168,12 +166,7 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
 
         try:
             FIR_modules.download_repeat(poa_cases, driver,
-                                        poa_dir_district,
-                                        poa_dir_police,
-                                        poa_dir_year,
-                                        poa_dir_FIR,
-                                        poa_dir_date,
-                                        poa_dir_sec)
+                                        )
             mha_date.append(argv[1])
             mha_unite_list.append(name)
             mha_number_of_records.append(record)
@@ -207,7 +200,12 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
     else:
         driver.quit()
         continue
-    poa_cases = FIR_modules.check_the_act(driver)
+    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                          poa_dir_police,
+                                          poa_dir_year,
+                                          poa_dir_FIR,
+                                          poa_dir_date,
+                                          poa_dir_sec)
     if not poa_cases:
         print('no poa. go to next page')
         mha_date.append(argv[1])
@@ -219,12 +217,7 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
     else:
         try:
             FIR_modules.download_repeat(poa_cases, driver,
-                                        poa_dir_district,
-                                        poa_dir_police,
-                                        poa_dir_year,
-                                        poa_dir_FIR,
-                                        poa_dir_date,
-                                        poa_dir_sec)
+                                        )
             mha_date.append(argv[1])
             mha_unite_list.append("-")
             mha_number_of_records.append("-")
@@ -259,7 +252,12 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
     else:
         driver.quit()
         continue
-    poa_cases = FIR_modules.check_the_act(driver)
+    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                          poa_dir_police,
+                                          poa_dir_year,
+                                          poa_dir_FIR,
+                                          poa_dir_date,
+                                          poa_dir_sec)
     if not poa_cases:
         print('no poa')
         driver.quit()
@@ -272,12 +270,7 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
     else:
         try:
             FIR_modules.download_repeat(poa_cases, driver,
-                                        poa_dir_district,
-                                        poa_dir_police,
-                                        poa_dir_year,
-                                        poa_dir_FIR,
-                                        poa_dir_date,
-                                        poa_dir_sec)
+                                        )
             total_records_dictionary.append(record)
             poa_dictionary.append(len(poa_cases))
             mha_date.append(argv[1])
@@ -327,4 +320,4 @@ df = pd.DataFrame(
     {key: pd.Series(value) for key, value in poa_dir.items()})
 print(df)
 df.to_csv(
-    os.path.join(base_directory, "poa_summary", f'FIRs_from_{argv[1]} to {argv[2]}.csv'))
+    os.path.join(base_directory, "poa_summary", f'{argv[5]}_from_{argv[1]}_to_{argv[2]}.csv'))
