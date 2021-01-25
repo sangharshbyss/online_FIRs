@@ -5,13 +5,13 @@ the_text = """<p style="text-align: center;"><strong>D</strong><span>ata</span><
 <p style="text-align: center;"><span>Secretariat,&nbsp;</span><strong>DLac</strong><strong>,<span>&nbsp;</span></strong><span>℅, Manuski, Deccan College Road, Yerwada, Pune 411006.&nbsp;</span></p>
 <p style="text-align: center;"><a href="http://www.manuski.in/" target="_blank" rel="noopener noreferrer"><span>www.manuski.in</span></a><span>,&nbsp;</span><a href="mailto:info@manuski.in" rel="noreferrer"><span>info@manuski.in</span></a><span>,&nbsp; संपर्क ८९५६५७८७६३.&nbsp;</span></p>
 <hr />
-<p><span>Ref: PoA/FIR/2021/01/06&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span><span>२५/०१/२०२१</span></p>
+<p><span>Ref: PoA/FIR/2021/01/03&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span><span>१/०१/२०२१</span></p>
 <p><span>जय भीम,</span></p>
-<p><span>ददिनांक १ जानेवारी ते दिनांक १९ जानेवारी २०२१ या काळात महाराष्ट्रात नोंद झालेल्या गुन्ह्यांचा सारांश व प्रथम खबरी अहवाल (FIR) च्या प्रति इमेल द्वारे बऱ्याच जनांपर्यंत पोचवण्याचा प्रयत्न करण्यात आला. आता २० जानेवारी ते २१ जानेवारी २०२१ पर्यंत महाराष्ट्रात अनुसूचित जाती आणि अनुसूचित जमाती अत्याचार प्रतिबंधक अधिनियम १९८९ अनुसार नोंद झालेल्या गुन्ह्यांचा सारांश खाली देण्यात येत आहे. सदर गुन्ह्यांच्या एफ.आय. आर. च्या प्रती सोबत जोडल्या आहेत. जातीय अत्याचाराने पीडित व्यक्तिंना योग्य तो कायदेशीर सल्ला&nbsp; व मानसिक पाठबळ मिळण्यासाठी यातून मदत व्हावी हि अपेक्षा. संविधानिक उद्देशांना गतिमान करण्याच्या हेतूने या माहितीचा कुठलीही संस्था किंवा व्यक्ती मुक्त वापर करून शकते. सदर उपयोग करताना डेटा लॅब (डी-लॅक) ने केलेल्या या प्रयत्नांचा उल्लेख करून योग्य ते श्रेयनिर्देश दिल्यास या प्रकल्पाला पाठबळ मिळेल याची कृपया नोंद घ्यावी. सदर माहितीत&nbsp; कुठलीही विसंगती आढळल्यास कृपया निदर्शनात आणून सहकार्य करावे.&nbsp;</span></p>
+<p><span>दिनांक १ जानेवारी ते दिनांक २१ जानेवारी २०२१ या काळात महाराष्ट्रात नोंद झालेल्या गुन्ह्यांचा सारांश व प्रथम खबरी अहवाल (FIR) च्या प्रति इमेल द्वारे बऱ्याच जनांपर्यंत पोचवण्याचा प्रयत्न करण्यात आला. आता २२ जानेवारी ते २२ जानेवारी २०२१ पर्यंत महाराष्ट्रात अनुसूचित जाती आणि अनुसूचित जमाती अत्याचार प्रतिबंधक अधिनियम १९८९ अनुसार नोंद झालेल्या गुन्ह्यांचा सारांश खाली देण्यात येत आहे. सदर गुन्ह्यांच्या एफ.आय. आर. च्या प्रती सोबत जोडल्या आहेत. जातीय अत्याचाराने पीडित व्यक्तिंना योग्य तो कायदेशीर सल्ला&nbsp; व मानसिक पाठबळ मिळण्यासाठी यातून मदत व्हावी हि अपेक्षा. संविधानिक उद्देशांना गतिमान करण्याच्या हेतूने या माहितीचा कुठलीही संस्था किंवा व्यक्ती मुक्त वापर करून शकते. सदर उपयोग करताना डेटा लॅब (डी-लॅक) ने केलेल्या या प्रयत्नांचा उल्लेख करून योग्य ते श्रेयनिर्देश दिल्यास या प्रकल्पाला पाठबळ मिळेल याची कृपया नोंद घ्यावी. सदर माहितीत&nbsp; कुठलीही विसंगती आढळल्यास कृपया निदर्शनात आणून सहकार्य करावे.&nbsp;</span></p>
 <p>&nbsp;</p>
 <p><strong>विशेष</strong><span>:&nbsp; सदर माहिती मध्ये केवळ नोंद झालेल्या व पोलिसांमार्फत संकेत स्थळावर उपलब्ध करण्यात आलेल्या गुन्ह्यांचीची आकडेवारी दिली आहे. काही विशेष स्वरूपाच्या गुन्ह्यांची माहिती (उदाहरणार्थ लैंगिक अत्याचाराची प्रकरणे) अशा पद्धतीने संकेतस्थळावर न देण्याच्या विशेष सूचना आहेत. त्यानुसार हे गुन्हे संकेतस्थळावर उपलब्ध नाहीत व ते आकडेवारीत दिसत नाहीत. तसेच काही पोलिस स्टेशन त्यांच्याकडील&nbsp; नोंद गुन्ह्याच्या प्रति संकेत स्थळावर उपलब्ध करून देत नाहीत त्यामुळे त्यांचीही नोंद दिलेल्या आकडेवारी मध्ये नाही.&nbsp;</span></p>
 <p>&nbsp;</p>
-<p><strong>ददिनांक २० जानेवारी व २१ जानेवारी २०२१ याकाळात महाराष्ट्रात अनुसूचित जाती आणि अनुसूचित जमाती अत्याचार प्रतिबंधक अधिनियम १९८९ नोंद झालेल्या तक्रारींचा सारांश:</strong></p>
+<p><strong>दिनांक २२ जानेवारी व २३ जानेवारी २०२१ याकाळात महाराष्ट्रात अनुसूचित जाती आणि अनुसूचित जमाती अत्याचार प्रतिबंधक अधिनियम १९८९ नोंद झालेल्या तक्रारींचा सारांश:</strong></p>
 <p>&nbsp;</p>
 <table style="background-color: #000000;" cellspacing="2">
 <tbody>
@@ -40,19 +40,19 @@ the_text = """<p style="text-align: center;"><strong>D</strong><span>ata</span><
 <p><span>1</span></p>
 </td>
 <td>
-<p><span>KOLHAPUR</span></p>
+<p><span>AURANGABAD RURAL</span></p>
 </td>
 <td>
-<p><span>RADHANAGARI</span></p>
+<p><span>VAIJAPUR</span></p>
 </td>
 <td>
-<p><span>17</span></p>
+<p><span>21</span></p>
 </td>
 <td>
-<p><span>20/01/2021&nbsp;</span></p>
+<p><span>13/01/2021&nbsp;</span></p>
 </td>
 <td>
-<p><span>भारतीय दंड संहिता १८६० - ३४,५०४,५०६ ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्‍याचार प्रतिबंधक) अधिनियम, १९८९ - 3(1)(r),3(1)(s),3(2)(va),6 ;</span></p>
+<p><span>भारतीय दंड संहिता १८६० - ३२३,५०४,५०६ ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्&zwj;याचार प्रतिबंधक) अधिनियम, १९८९ - 3(1)(r),3(1)(s) ;</span></p>
 </td>
 </tr>
 <tr style="background-color: #ffffff;">
@@ -60,19 +60,19 @@ the_text = """<p style="text-align: center;"><strong>D</strong><span>ata</span><
 <p><span>2</span></p>
 </td>
 <td>
-<p><span>NANDED</span></p>
+<p><span>SOLAPUR RURAL</span></p>
 </td>
 <td>
-<p><span>KINWAT</span></p>
+<p><span>PANDHARPUR TALUKA</span></p>
 </td>
 <td>
-<p><span>19</span></p>
+<p><span>32</span></p>
 </td>
 <td>
-<p><span>21/01/2021&nbsp;</span></p>
+<p><span>13/01/2021&nbsp;</span></p>
 </td>
 <td>
-<p><span>भारतीय दंड संहिता १८६० - ३२३,३४,५०६ ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्‍याचार प्रतिबंधक) अधिनियम, १९८९ - 3(1)(i),3(1)(r),3(1)(s) ;</span></p>
+<p><span>भारतीय दंड संहिता १८६० - १४३,१४७,१४८,१४९,३२३,३२६,५०४,५०६ ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्&zwj;याचार प्रतिबंधक) अधिनियम, १९८९ - 3(1)(r),3(1)(s) ; महाराष्ट्र पोलीस अधिनियम, १९५१ - 135 ;</span></p>
 </td>
 </tr>
 <tr style="background-color: #ffffff;">
@@ -80,19 +80,19 @@ the_text = """<p style="text-align: center;"><strong>D</strong><span>ata</span><
 <p><span>3</span></p>
 </td>
 <td>
-<p><span>NASHIK CITY</span></p>
+<p><span>SOLAPUR RURAL</span></p>
 </td>
 <td>
-<p><span>ADAGAON POLICE STATION</span></p>
+<p><span>SOLAPUR</span></p>
 </td>
 <td>
-<p><span>8</span></p>
+<p><span>44</span></p>
 </td>
 <td>
-<p><span>20/01/2021</span></p>
+<p><span>13/01/2021</span></p>
 </td>
 <td>
-<p><span>शस्‍त्र अधिनियम, १९५९ - 25 ; भारतीय दंड संहिता १८६० - १४३,१४७,१४८,१४९,364-A,३२३,३२४,५०४,५०६ ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्‍याचार प्रतिबंधक) अधिनियम, १९८९ - 3,3(2)(va) ;</span></p>
+<p><span>भारतीय दंड संहिता १८६० - १४३,१४७,१४८,३२३,३२६,५०४,५०६ ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्&zwj;याचार प्रतिबंधक) अधिनियम, १९८९ - 3(1)(r),3(1)(s),3(2)(va) ;</span></p>
 </td>
 </tr>
 <tr style="background-color: #ffffff;">
@@ -100,66 +100,26 @@ the_text = """<p style="text-align: center;"><strong>D</strong><span>ata</span><
 <p><span>4</span></p>
 </td>
 <td>
-<p><span>SANGLI</span></p>
+<p><span>THANE CITY</span></p>
 </td>
 <td>
-<p><span>AATPADI</span></p>
+<p><span>NAUPADA</span></p>
 </td>
 <td>
-<p><span>25</span></p>
+<p><span>11</span></p>
 </td>
 <td>
-<p><span>20/01/2021</span></p>
+<p><span>13/01/2021</span></p>
 </td>
 <td>
-<p><span>भारतीय दंड संहिता १८६० - ३४,५०४,५०६ ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्‍याचार प्रतिबंधक) अधिनियम, १९८९ - 3(1)(r),3(2)(va),6 </span></p>
-</td>
-</tr>
-<tr style="background-color: #ffffff;">
-<td>
-<p><span>5</span></p>
-</td>
-<td>
-<p><span>SOLAPUR RURAL</span></p>
-</td>
-<td>
-<p><span>AKLUJ</span></p>
-</td>
-<td>
-<p><span>42</span></p>
-</td>
-<td>
-<p><span>21/01/2021</span></p>
-</td>
-<td>
-<p><span>भारतीय दंड संहिता १८६० - २७९,२८३,३२४,३३७ ; मोटरवाहन अधिनियम, १९८८ - 134(A),134(B),177,184 ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्‍याचार प्रतिबंधक) अधिनियम, १९८९ - 3(2)(va) </span></p>
-</td>
-</tr>
-<tr style="background-color: #ffffff;">
-<td>
-<p><span>6</span></p>
-</td>
-<td>
-<p><span>SOLAPUR RURAL</span></p>
-</td>
-<td>
-<p><span>KARMALA</span></p>
-</td>
-<td>
-<p><span>77</span></p>
-</td>
-<td>
-<p><span>20/01/2021</span></p>
-</td>
-<td>
-<p><span>भारतीय दंड संहिता १८६० - १४३,१४९,५०४,५०६ ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्‍याचार प्रतिबंधक) अधिनियम, १९८९ - 3(1)(r),3(1)(s),3(2)(va)</span></p>
+<p><span>भारतीय दंड संहिता १८६० - ३२३,३४,४०६,४२०,४६५,४६७,४६८,४७१,५०४,५०६ ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्&zwj;याचार प्रतिबंधक) अधिनियम, १९८९ - 3,3(1)(r),3(1)(s) ;</span></p>
 </td>
 </tr>
 </tbody>
 </table>
 <p>&nbsp;</p>
 <p><span>&nbsp;</span></p>
-<p><span>वरील सारणी वरून हे स्पष्ट होते कि, दिनांक २० जानेवारी व दिनांक २१ जानेवारी २०२१ या काळात म्हणजेच २ दिवसांमध्ये, अनुसूचित जाती व अनुसूचित जमाती अत्याचार प्रतिबंधक कायदा १९८९ अनुसार कमीत कमी ६ गुन्हे नोंद झालेले आहेत. यापैकी सोलापूर ग्रामीण या विभागात २ गुन्ह्यांची नोंद झाल्याचे दिसून येते. तसेच कोल्हापूर, नांदेड, नाशिक, सांगली या जिल्ह्यांमध्ये प्रत्येकी एक गुन्ह्याची नोंद झाल्याचे दिसून येते.&nbsp;&nbsp;</span></p>
+<p><span>वरील सारणी वरून हे स्पष्ट होते कि, दिनांक २२ जानेवारी व दिनांक २२ जानेवारी २०२१ या काळात म्हणजेच २ दिवसांमध्ये, अनुसूचित जाती व अनुसूचित जमाती अत्याचार प्रतिबंधक कायदा १९८९ अनुसार कमीत कमी ६ गुन्हे नोंद झालेले आहेत. यापैकी बीड या विभागात २ गुन्ह्यांची नोंद झाल्याचे दिसून येते. तसेच परभणी व सोलापूर या जिल्ह्यांमध्ये प्रत्येकी एक गुन्ह्याची नोंद झाल्याचे दिसून येते.&nbsp;&nbsp;</span></p>
 <p>&nbsp;</p>
 <p><span>डेटा&nbsp; टीम&nbsp;</span></p>
 <p><span>संपर्क:&nbsp;</span></p>
