@@ -40,19 +40,19 @@ the_text = """<p style="text-align: center;"><strong>D</strong><span>ata</span><
 <p><span>1</span></p>
 </td>
 <td>
-<p><span>AURANGABAD RURAL</span></p>
+<p><span>KOLHAPUR</span></p>
 </td>
 <td>
-<p><span>VAIJAPUR</span></p>
+<p><span>RADHANAGARI</span></p>
 </td>
 <td>
-<p><span>21</span></p>
+<p><span>17</span></p>
 </td>
 <td>
-<p><span>13/01/2021&nbsp;</span></p>
+<p><span>20/01/2021&nbsp;</span></p>
 </td>
 <td>
-<p><span>भारतीय दंड संहिता १८६० - ३२३,५०४,५०६ ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्&zwj;याचार प्रतिबंधक) अधिनियम, १९८९ - 3(1)(r),3(1)(s) ;</span></p>
+<p><span>भारतीय दंड संहिता १८६० - ३४,५०४,५०६ ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्‍याचार प्रतिबंधक) अधिनियम, १९८९ - 3(1)(r),3(1)(s),3(2)(va),6 ;</span></p>
 </td>
 </tr>
 <tr style="background-color: #ffffff;">
@@ -60,19 +60,19 @@ the_text = """<p style="text-align: center;"><strong>D</strong><span>ata</span><
 <p><span>2</span></p>
 </td>
 <td>
-<p><span>SOLAPUR RURAL</span></p>
+<p><span>NANDED</span></p>
 </td>
 <td>
-<p><span>PANDHARPUR TALUKA</span></p>
+<p><span>KINWAT</span></p>
 </td>
 <td>
-<p><span>32</span></p>
+<p><span>19</span></p>
 </td>
 <td>
-<p><span>13/01/2021&nbsp;</span></p>
+<p><span>21/01/2021&nbsp;</span></p>
 </td>
 <td>
-<p><span>भारतीय दंड संहिता १८६० - १४३,१४७,१४८,१४९,३२३,३२६,५०४,५०६ ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्&zwj;याचार प्रतिबंधक) अधिनियम, १९८९ - 3(1)(r),3(1)(s) ; महाराष्ट्र पोलीस अधिनियम, १९५१ - 135 ;</span></p>
+<p><span>भारतीय दंड संहिता १८६० - ३२३,३४,५०६ ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्‍याचार प्रतिबंधक) अधिनियम, १९८९ - 3(1)(i),3(1)(r),3(1)(s) ;</span></p>
 </td>
 </tr>
 <tr style="background-color: #ffffff;">
@@ -80,19 +80,19 @@ the_text = """<p style="text-align: center;"><strong>D</strong><span>ata</span><
 <p><span>3</span></p>
 </td>
 <td>
-<p><span>SOLAPUR RURAL</span></p>
+<p><span>NASHIK CITY</span></p>
 </td>
 <td>
-<p><span>SOLAPUR</span></p>
+<p><span>ADAGAON POLICE STATION</span></p>
 </td>
 <td>
-<p><span>44</span></p>
+<p><span>8</span></p>
 </td>
 <td>
-<p><span>13/01/2021</span></p>
+<p><span>20/01/2021</span></p>
 </td>
 <td>
-<p><span>भारतीय दंड संहिता १८६० - १४३,१४७,१४८,३२३,३२६,५०४,५०६ ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्&zwj;याचार प्रतिबंधक) अधिनियम, १९८९ - 3(1)(r),3(1)(s),3(2)(va) ;</span></p>
+<p><span>शस्‍त्र अधिनियम, १९५९ - 25 ; भारतीय दंड संहिता १८६० - १४३,१४७,१४८,१४९,364-A,३२३,३२४,५०४,५०६ ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्‍याचार प्रतिबंधक) अधिनियम, १९८९ - 3,3(2)(va) ;</span></p>
 </td>
 </tr>
 <tr style="background-color: #ffffff;">
@@ -100,19 +100,59 @@ the_text = """<p style="text-align: center;"><strong>D</strong><span>ata</span><
 <p><span>4</span></p>
 </td>
 <td>
-<p><span>THANE CITY</span></p>
+<p><span>SANGLI</span></p>
 </td>
 <td>
-<p><span>NAUPADA</span></p>
+<p><span>AATPADI</span></p>
 </td>
 <td>
-<p><span>11</span></p>
+<p><span>25</span></p>
 </td>
 <td>
-<p><span>13/01/2021</span></p>
+<p><span>20/01/2021</span></p>
 </td>
 <td>
-<p><span>भारतीय दंड संहिता १८६० - ३२३,३४,४०६,४२०,४६५,४६७,४६८,४७१,५०४,५०६ ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्&zwj;याचार प्रतिबंधक) अधिनियम, १९८९ - 3,3(1)(r),3(1)(s) ;</span></p>
+<p><span>भारतीय दंड संहिता १८६० - ३४,५०४,५०६ ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्‍याचार प्रतिबंधक) अधिनियम, १९८९ - 3(1)(r),3(2)(va),6 </span></p>
+</td>
+</tr>
+<tr style="background-color: #ffffff;">
+<td>
+<p><span>5</span></p>
+</td>
+<td>
+<p><span>SOLAPUR RURAL</span></p>
+</td>
+<td>
+<p><span>AKLUJ</span></p>
+</td>
+<td>
+<p><span>42</span></p>
+</td>
+<td>
+<p><span>21/01/2021</span></p>
+</td>
+<td>
+<p><span>भारतीय दंड संहिता १८६० - २७९,२८३,३२४,३३७ ; मोटरवाहन अधिनियम, १९८८ - 134(A),134(B),177,184 ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्‍याचार प्रतिबंधक) अधिनियम, १९८९ - 3(2)(va) </span></p>
+</td>
+</tr>
+<tr style="background-color: #ffffff;">
+<td>
+<p><span>6</span></p>
+</td>
+<td>
+<p><span>SOLAPUR RURAL</span></p>
+</td>
+<td>
+<p><span>KARMALA</span></p>
+</td>
+<td>
+<p><span>77</span></p>
+</td>
+<td>
+<p><span>20/01/2021</span></p>
+</td>
+<td>
+<p><span>भारतीय दंड संहिता १८६० - १४३,१४९,५०४,५०६ ; अनुसूचीत जाती आणि अनुसूचीत जमाती (अत्‍याचार प्रतिबंधक) अधिनियम, १९८९ - 3(1)(r),3(1)(s),3(2)(va)</span></p>
 </td>
 </tr>
 </tbody>
