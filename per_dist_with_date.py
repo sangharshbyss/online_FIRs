@@ -24,7 +24,7 @@ from proxies3 import list_of_proxies
 
 # constants
 # define download directory
-base_directory = r'/home/sangharsh/Documents/PoA/data/FIR/January'
+base_directory = r'/home/sangharsh/Documents/PoA/data/FIR/February'
 download_directory = os.path.join(base_directory, "copies", f'{argv[1]} _ {argv[2]}')
 if not download_directory:
     os.mkdir(download_directory)
@@ -116,6 +116,7 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
     total_records_dictionary = []
     poa_dictionary = []
     # call the value of records to view @ 50
+    time.sleep(2)
     FIR_modules.view_record(driver)
     # call search
     FIR_modules.search(driver=driver)
