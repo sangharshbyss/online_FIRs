@@ -17,8 +17,7 @@ import pandas as pd
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, \
     TimeoutException, \
-    WebDriverException, \
-    ElementNotInteractableException
+    WebDriverException
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 from urllib3.exceptions import MaxRetryError, NewConnectionError
 
@@ -27,7 +26,7 @@ from proxies4 import list_of_proxies
 
 # constants
 # define download directory
-base_directory = r'/home/sangharsh/Documents/PoA/data/FIR/March'
+base_directory = r'/home/sangharsh/Documents/PoA/data/FIR/February'
 download_directory = os.path.join(base_directory, "copies", f'{argv[1]} _ {argv[2]}')
 if not download_directory:
     os.mkdir(download_directory)
@@ -130,11 +129,11 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
 
         driver.quit()
         poa_cases, non_poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                  poa_dir_police,
-                  poa_dir_year,
-                  poa_dir_FIR,
-                  poa_dir_date,
-                  poa_dir_sec)
+                                                             poa_dir_police,
+                                                             poa_dir_year,
+                                                             poa_dir_FIR,
+                                                             poa_dir_date,
+                                                             poa_dir_sec)
 
         total_records_dictionary.append("REPEAT")
         poa_dictionary.append("REPEAT")
@@ -143,7 +142,7 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
         break
     print(f'{name}{record}')
     if int(record) > 0:
-        print('record found')
+        print('scanning records...')
     else:
         mha_date.append(argv[1])
         mha_unite_list.append(name)
@@ -151,54 +150,21 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
         mha_poa_cases.append("0")
         mha_downloaded.append("0")
         driver.quit()
+        print('no records')
         continue
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                  poa_dir_police,
-                  poa_dir_year,
-                  poa_dir_FIR,
-                  poa_dir_date,
-                  poa_dir_sec)
+                                          poa_dir_police,
+                                          poa_dir_year,
+                                          poa_dir_FIR,
+                                          poa_dir_date,
+                                          poa_dir_sec)
     if not poa_cases:
         print('no poa. go to next page')
-        mha_date.append(argv[1])
-        mha_unite_list.append(name)
-        mha_number_of_records.append(record)
-        mha_poa_cases.append(0)
-        mha_downloaded.append("0")
 
     else:
+        FIR_modules.download_repeat(poa_cases, driver,
+                                    )
 
-        try:
-            FIR_modules.download_repeat(poa_cases, driver,
-                                        )
-            mha_date.append(argv[1])
-            mha_unite_list.append(name)
-            mha_number_of_records.append(record)
-            mha_poa_cases.append(len(poa_cases))
-            mha_downloaded.append("done")
-        except (WebDriverException, TimeoutException,
-                NoSuchElementException):
-            print("download failed")
-            mha_date.append(argv[1])
-            mha_unite_list.append(name)
-            mha_number_of_records.append(record)
-            mha_poa_cases.append(len(poa_cases))
-            mha_downloaded.append("failed")
-            driver.quit()
-            time.sleep(5)
-            continue
-        except ElementNotInteractableException:
-            print("Element not interactable")
-            mha_date.append(argv[1])
-            mha_unite_list.append(name)
-            mha_number_of_records.append(record)
-            mha_poa_cases.append(len(poa_cases))
-            mha_downloaded.append("failed")
-            driver.quit()
-            time.sleep(5)
-            continue
-        except:
-            continue
     if int(record) > 50:
         FIR_modules.second_page(driver)
     else:
@@ -212,44 +178,12 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
                                           poa_dir_sec)
     if not poa_cases:
         print('no poa. go to next page')
-        mha_date.append(argv[1])
-        mha_unite_list.append("-")
-        mha_number_of_records.append("-")
-        mha_poa_cases.append(0)
-        mha_downloaded.append("0")
 
     else:
-        try:
-            FIR_modules.download_repeat(poa_cases, driver,
-                                        )
-            mha_date.append(argv[1])
-            mha_unite_list.append("-")
-            mha_number_of_records.append("-")
-            mha_poa_cases.append(len(poa_cases))
-            mha_downloaded.append("done")
-        except (WebDriverException, TimeoutException,
-                NoSuchElementException):
-            print("download failed")
-            mha_date.append(argv[1])
-            mha_unite_list.append("-")
-            mha_number_of_records.append("-")
-            mha_poa_cases.append(len("-"))
-            mha_downloaded.append("failed")
-            driver.quit()
-            time.sleep(5)
-            continue
-        except ElementNotInteractableException:
-            print("Element not interactable")
-            mha_date.append(argv[1])
-            mha_unite_list.append(name)
-            mha_number_of_records.append(record)
-            mha_poa_cases.append(len(poa_cases))
-            mha_downloaded.append("failed")
-            driver.quit()
-            time.sleep(5)
-            continue
-        except:
-            continue
+        print("PoA")
+        FIR_modules.download_repeat(poa_cases, driver,
+                                    )
+
     if int(record) > 100:
         print('going to page 3')
         FIR_modules.third_page(driver)
@@ -264,47 +198,33 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
                                           poa_dir_sec)
     if not poa_cases:
         print('no poa')
+    else:
+        print("PoA")
+        FIR_modules.download_repeat(poa_cases, driver,
+                                    )
+
+    if int(record) > 150:
+        print('going to page 4')
+        FIR_modules.forth_page(driver)
+    else:
         driver.quit()
-        mha_date.append(argv[1])
-        mha_unite_list.append("-")
-        mha_number_of_records.append("-")
-        mha_poa_cases.append(0)
-        mha_downloaded.append("0")
+        continue
+    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                          poa_dir_police,
+                                          poa_dir_year,
+                                          poa_dir_FIR,
+                                          poa_dir_date,
+                                          poa_dir_sec)
+    if not poa_cases:
+        print('no poa')
+        driver.quit()
         continue
     else:
-        try:
-            FIR_modules.download_repeat(poa_cases, driver,
-                                        )
-            total_records_dictionary.append(record)
-            poa_dictionary.append(len(poa_cases))
-            mha_date.append(argv[1])
-            mha_unite_list.append("-")
-            mha_number_of_records.append("-")
-            mha_poa_cases.append(len(poa_cases))
-            mha_downloaded.append("done")
-        except (WebDriverException, TimeoutException,
-                NoSuchElementException):
-            print("download failed")
-            mha_date.append(argv[1])
-            mha_unite_list.append(name)
-            mha_number_of_records.append(record)
-            mha_poa_cases.append(len(poa_cases))
-            mha_downloaded.append("failed")
-            driver.quit()
-            time.sleep(5)
-            continue
-        except ElementNotInteractableException:
-            print("Element not interactable")
-            mha_date.append(argv[1])
-            mha_unite_list.append(name)
-            mha_number_of_records.append(record)
-            mha_poa_cases.append(len(poa_cases))
-            mha_downloaded.append("failed")
-            driver.quit()
-            time.sleep(5)
-            continue
-        except:
-            continue
+        print("PoA")
+        FIR_modules.download_repeat(poa_cases, driver,
+                                    )
+        total_records_dictionary.append(record)
+        poa_dictionary.append(len(poa_cases))
 
     driver.quit()
 mha_records = {"Date": mha_date,
