@@ -2,6 +2,9 @@
 1. All districts.
 2. seperate webdriver for each district
 3. improvement from per_dist_day.py for
+4. separate summary of PoA cases.
+5. Change download directory every month.
+5. full proof.
 including exact date in summary record.
 """
 
@@ -20,11 +23,11 @@ from selenium.webdriver.common.proxy import Proxy, ProxyType
 from urllib3.exceptions import MaxRetryError, NewConnectionError
 
 import FIR_modules
-from proxies3 import list_of_proxies
+from proxies4 import list_of_proxies
 
 # constants
 # define download directory
-base_directory = r'/home/sangharsh/Documents/PoA/data/FIR/February'
+base_directory = r'/home/sangharsh/Documents/PoA/data/FIR/March'
 download_directory = os.path.join(base_directory, "copies", f'{argv[1]} _ {argv[2]}')
 if not download_directory:
     os.mkdir(download_directory)
