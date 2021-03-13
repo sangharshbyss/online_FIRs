@@ -169,3 +169,12 @@ def third_page(driver):
         "/tbody/tr[52]/td/table/tbody/tr/td[3]/a"
     )
     p3.click()
+
+
+def forth_page(driver):
+    p4 = driver.find_element_by_xpath(
+        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+        "/tr[52]/td/table/tbody/tr/td[4]/a"
+    )
+    p4.click()
