@@ -22,7 +22,7 @@ from selenium.webdriver.common.proxy import Proxy, ProxyType
 from urllib3.exceptions import MaxRetryError, NewConnectionError
 
 import FIR_modules
-from proxies4 import list_of_proxies
+from proxies3 import list_of_proxies
 
 # constants
 # define download directory
