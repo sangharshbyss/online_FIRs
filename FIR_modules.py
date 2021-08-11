@@ -133,7 +133,7 @@ def download_repeat(some_list, driver,
         print('downloading...')
         time.sleep(2)
         new_list[i].click()
-        time.sleep(8)
+        time.sleep(10)
         for handle in driver.window_handles:
             if handle != main_window:
                 download_window = handle
@@ -145,9 +145,9 @@ def download_repeat(some_list, driver,
             "#ReportViewer1_ctl06_ctl04_ctl00_Menu > div:nth-child(4) "
             "> a:nth-child(1)"
         )
-        time.sleep(2)
+        time.sleep(8)
         down_load.send_keys(Keys.ENTER)
-        time.sleep(2)
+        time.sleep(5)
         driver.close()
         print('finished')
         driver.switch_to.window(main_window)
@@ -178,3 +178,149 @@ def forth_page(driver):
         "/tr[52]/td/table/tbody/tr/td[4]/a"
     )
     p4.click()
+
+def fifth_page(driver):
+    p5 = driver.find_element_by_xpath(
+        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+        "/tr[52]/td/table/tbody/tr/td[5]/a"
+        )
+    p5.click()
+
+def sixth_page(driver):
+    p6 = driver.find_element_by_xpath(
+        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+        "/tr[52]/td/table/tbody/tr/td[6]/a"
+    )
+    p6.click()
+
+
+
+def seventh_page(driver):
+    p7 = driver.find_element_by_xpath(
+        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table/"
+        "tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+        "/tr[52]/td/table/tbody/tr/td[7]/a"
+    )
+    p7.click()
+
+
+def eightth_page(driver):
+    p8 = driver.find_element_by_xpath(
+        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+        "/tr[52]/td/table/tbody/tr/td[8]/a"
+    )
+    p8.click()
+
+
+def ninenth_page(driver):
+    p9 = driver.find_element_by_xpath(
+        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+        "/tr[52]/td/table/tbody/tr/td[9]/a"
+    )
+    p9.click()
+
+
+def tenth_page(driver):
+    p10 = driver.find_element_by_xpath(
+        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+        "/tr[52]/td/table/tbody/tr/td[10]/a"
+    )
+    p10.click()
+
+
+def next_page(driver):
+    next_p = driver.find_element_by_xpath(
+        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+        "/tr[52]/td/table/tbody/tr/td[11]/a"
+    )
+    next_p.click()
+
+
+def twelth_page(driver):
+    p12 = driver.find_element_by_xpath(
+        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+        "/tr[52]/td/table/tbody/tr/td[3]/a"
+    )
+    p12.click()
+
+
+def thirteen_page(driver):
+    p13 = driver.find_element_by_xpath(
+        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+        "/tr[52]/td/table/tbody/tr/td[4]/a"
+    )
+    p13.click()
+
+
+def fourteen_page(driver):
+    p14 = driver.find_element_by_xpath(
+        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+        "/tr[52]/td/table/tbody/tr/td[5]/a"
+    )
+    p14.click()
+
+
+def fifteen_pagge(driver):
+    p15 = driver.find_element_by_xpath(
+        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+        "/tr[52]/td/table/tbody/tr/td[6]/a"
+    )
+    p15.click()
+
+
+def sixteen_page(driver):
+    p16 = driver.find_element_by_xpath(
+        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+        "/tr[52]/td/table/tbody/tr/td[7]/a"
+    )
+    p16.click()
+
+
+def seventeen_page(driver):
+    p17 = driver.find_element_by_xpath(
+        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+        "/tr[52]/td/table/tbody/tr/td[8]/a"
+    )
+    p17.click()
+
+
+def eighteen_page(driver):
+    p18 = driver.find_element_by_xpath(
+        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+        "/tr[52]/td/table/tbody/tr/td[9]/a"
+    )
+    p18.click()
+
+
+def ninteen_page(driver):
+    p19 = driver.find_element_by_xpath(
+        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+        "/tr[52]/td/table/tbody/tr/td[10]/a"
+    )
+    p19.click()
+
+
+def twenty_page(driver):
+    p20 = driver.find_element_by_xpath(
+        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+        "/tr[52]/td/table/tbody/tr/td[11]/a"
+    )
+    p20.click()
+
+
+

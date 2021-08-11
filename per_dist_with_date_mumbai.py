@@ -27,22 +27,14 @@ from proxies2 import list_of_proxies
 # constants
 # define download directory
 base_directory = r'/home/sangharsh/Documents/PoA/data/FIR/April'
-download_directory = os.path.join(base_directory, "copies", f'{argv[1]} _ {argv[2]}')
+download_directory = os.path.join(base_directory, "copies", f'{argv[1]}')
 if not download_directory:
     os.mkdir(download_directory)
 
 main_url = r'https://citizen.mahapolice.gov.in/Citizen/MH/PublishedFIRs.aspx'
 
 # list of districts
-ALL_Districts = ['AHMEDNAGAR', 'AKOLA', 'AMRAVATI CITY', 'AMRAVATI RURAL', 'AURANGABAD CITY',
-                 'AURANGABAD RURAL', 'BEED', 'BHANDARA', 'BULDHANA',
-                 'CHANDRAPUR', 'DHULE', 'GADCHIROLI', 'GONDIA', 'HINGOLI', 'JALGAON', 'JALNA',
-                 'KOLHAPUR', 'LATUR', 'NAGPUR CITY', 'NAGPUR RURAL', 'NANDED', 'NANDURBAR',
-                 'NASHIK CITY', 'NASHIK RURAL', 'NAVI MUMBAI', 'OSMANABAD', 'PALGHAR', 'PARBHANI',
-                 'PIMPRI-CHINCHWAD', 'PUNE CITY', 'PUNE RURAL', 'RAIGAD', 'RAILWAY AURANGABAD',
-                 'RAILWAY MUMBAI', 'RAILWAY NAGPUR', 'RAILWAY PUNE', 'RATNAGIRI', 'SANGLI', 'SATARA',
-                 'SINDHUDURG', 'SOLAPUR CITY', 'SOLAPUR RURAL', 'THANE CITY', 'THANE RURAL', 'WARDHA',
-                 'WASHIM', 'YAVATMAL']
+ALL_Districts = ['BRIHAN MUMBAI CITY'   ]
 
 print(list(enumerate(ALL_Districts)))
 
@@ -67,7 +59,7 @@ mha_unite_list = []
 mha_number_of_records = []
 mha_poa_cases = []
 mha_downloaded = []
-for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
+for name in ALL_Districts:
 
     district_dictionary = {"Unit": '', "Police_Station": '',
                            "Number of Records": '', "PoA Cases": '',
@@ -110,7 +102,7 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
         continue
 
     # call function for entering date, set the date through command line
-    FIR_modules.enter_date(date1=argv[1], date2=argv[2], driver=driver)
+    FIR_modules.enter_date(date1=argv[1], date2=argv[1], driver=driver)
     # call function district, for now its Dhule. will change latter to command line
     FIR_modules.district_selection(name, driver=driver)
 
@@ -585,7 +577,7 @@ mha_records = {"Date": mha_date,
 df = pd.DataFrame(
     {key: pd.Series(value) for key, value in mha_records.items()})
 df.to_csv(
-    os.path.join(base_directory, "summary", f'{argv[5]}_{argv[1]} to {argv[2]}.csv'))
+    os.path.join(base_directory, "summary", f'{argv[2]}_{argv[1]}.csv'))
 poa_dir = {"District": poa_dir_district, "Police_Station": poa_dir_police,
            "FIR": poa_dir_FIR, "Date_&_Time": poa_dir_date, "Acts_&_Sections": poa_dir_sec}
 
@@ -593,4 +585,4 @@ df = pd.DataFrame(
     {key: pd.Series(value) for key, value in poa_dir.items()})
 print(df)
 df.to_csv(
-    os.path.join(base_directory, "poa_summary", f'{argv[5]}_from_{argv[1]}_to_{argv[2]}.csv'))
+    os.path.join(base_directory, "poa_summary", f'{argv[2]}_from_{argv[1]}.csv'))
