@@ -28,6 +28,7 @@ from proxies2 import list_of_proxies
 # define download directory
 base_directory = r'/home/sangharsh/Documents/PoA/data/FIR/April'
 download_directory = os.path.join(base_directory, "copies", f'{argv[1]} _ {argv[2]}')
+
 if not download_directory:
     os.mkdir(download_directory)
 
@@ -67,7 +68,7 @@ mha_unite_list = []
 mha_number_of_records = []
 mha_poa_cases = []
 mha_downloaded = []
-for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
+for name in ALL_Districts:
 
     district_dictionary = {"Unit": '', "Police_Station": '',
                            "Number of Records": '', "PoA Cases": '',
@@ -413,7 +414,6 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
 
-
     if int(record) > 650:
         print('going to 14th page')
         FIR_modules.fourteen_page(driver)
@@ -480,7 +480,6 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
 
-
     if int(record) > 800:
         print('going to 17th page')
         FIR_modules.seventeen_page(driver)
@@ -524,7 +523,6 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
         print("PoA")
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
-
 
     if int(record) > 900:
         print('going to 19th page')
@@ -570,7 +568,6 @@ for name in ALL_Districts[int(argv[3]):int(argv[4]):]:
         print("PoA")
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
-
 
         total_records_dictionary.append(record)
         poa_dictionary.append(len(poa_cases))
