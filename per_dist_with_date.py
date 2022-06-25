@@ -31,7 +31,7 @@ main_url = r'https://citizen.mahapolice.gov.in/Citizen/MH/PublishedFIRs.aspx'
 
 # list of districts
 ALL_Districts = ['AHMEDNAGAR', 'AKOLA', 'AMRAVATI CITY', 'AMRAVATI RURAL', 'AURANGABAD CITY',
-                 'AURANGABAD RURAL', 'BEED', 'BHANDARA', 'BRIHAN MUMBAI CITY', 'BULDHANA',
+                 'AURANGABAD RURAL', 'BEED', 'BHANDARA', 'BULDHANA',
                  'CHANDRAPUR', 'DHULE', 'GADCHIROLI', 'GONDIA', 'HINGOLI', 'JALGAON', 'JALNA',
                  'KOLHAPUR', 'LATUR', 'Mira-Bhayandar, Vasai-Virar Police Commissioner',
                  'NAGPUR CITY', 'NAGPUR RURAL', 'NANDED', 'NANDURBAR',
@@ -162,6 +162,7 @@ for name in ALL_Districts:
         print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
+    time.sleep(3)
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
                                           poa_dir_police,
                                           poa_dir_year,
@@ -189,6 +190,7 @@ for name in ALL_Districts:
         print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
+    time.sleep(3)
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
                                           poa_dir_police,
                                           poa_dir_year,
@@ -213,6 +215,7 @@ for name in ALL_Districts:
         print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
+    time.sleep(3)
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
                                           poa_dir_police,
                                           poa_dir_year,
