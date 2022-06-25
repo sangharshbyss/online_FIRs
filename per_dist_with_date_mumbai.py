@@ -1,12 +1,4 @@
-"""
-1. All districts.
-2. seperate webdriver for each district
-3. improvement from per_dist_day.py for
-4. separate summary of PoA cases.
-5. Change download directory every month.
-5. full proof.
-including exact date in summary record.
-"""
+# use 'only_mumbai.py' instead
 
 import os
 import time
