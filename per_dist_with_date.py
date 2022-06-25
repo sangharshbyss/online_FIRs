@@ -98,6 +98,7 @@ for name in ALL_Districts:
 
     driver = webdriver.Firefox(options=options, proxy=proxy)
     open_page()
+    print(f'{name} in progress')
     FIR_modules.enter_date(date1=argv[1], date2=argv[2], driver=driver)
     # call function district, for now its Dhule. will change latter to command line
     FIR_modules.district_selection(name, driver=driver)
@@ -110,6 +111,7 @@ for name in ALL_Districts:
     FIR_modules.view_record(driver)
     # call search
     FIR_modules.search(driver=driver)
+    time.sleep(1)
     record = FIR_modules.number_of_records(driver=driver)
     if record == '':
         print(f'page not loaded for \n'
@@ -117,7 +119,7 @@ for name in ALL_Districts:
 
         driver.quit()
         break
-    print(f'{name} {record}')
+    print(f'total records {record}')
 
     if int(record) > 0:
         print('scanning records...')
