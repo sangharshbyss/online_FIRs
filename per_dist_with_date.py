@@ -30,16 +30,7 @@ if not download_directory:
 main_url = r'https://citizen.mahapolice.gov.in/Citizen/MH/PublishedFIRs.aspx'
 
 # list of districts
-ALL_Districts = ['AMRAVATI RURAL', 'AURANGABAD CITY', 'AURANGABAD RURAL', 'BEED',
-                 'BHANDARA', 'BULDHANA', 'CHANDRAPUR', 'DHULE',
-                 'GADCHIROLI', 'GONDIA', 'HINGOLI', 'JALGAON', 'JALNA', 'KOLHAPUR',
-                 'LATUR', 'Mira-Bhayandar, Vasai-Virar Police Commissioner','NAGPUR CITY',
-                 'NAGPUR RURAL', 'NANDED', 'NANDURBAR', 'NASHIK CITY', 'NASHIK RURAL',
-                 'NAVI MUMBAI', 'OSMANABAD', 'PALGHAR', 'PARBHANI', 'PIMPRI-CHINCHWAD',
-                 'PUNE CITY', 'PUNE RURAL', 'RAIGAD', 'RAILWAY AURANGABAD', 'RAILWAY MUMBAI',
-                 'RAILWAY NAGPUR', 'RAILWAY PUNE', 'RATNAGIRI', 'SANGLI', 'SATARA', 'SINDHUDURG',
-                 'SOLAPUR CITY', 'SOLAPUR RURAL', 'THANE CITY', 'THANE RURAL', 'WARDHA',
-                 'WASHIM', 'YAVATMAL']
+ALL_Districts = ['AMRAVATI RURAL', 'BEED']
 
 
 # print(list(enumerate(ALL_Districts)))
@@ -59,6 +50,11 @@ poa_dir_year = []
 poa_dir_FIR = []
 poa_dir_date = []
 poa_dir_sec = []
+
+# list for terminal output
+dist_name = []
+dist_total = []
+dist_poa = []
 
 for name in ALL_Districts:
 
@@ -99,21 +95,25 @@ for name in ALL_Districts:
 
     driver = webdriver.Firefox(options=options, proxy=proxy)
     open_page()
-    print(f'\n {name} in progress')
+    # for terminal output
+    number_of_cases_on_all_pages = []
+    print(f'\n {name} in progress...')
     FIR_modules.enter_date(date1=argv[1], date2=argv[2], driver=driver)
-    # call function district, for now its Dhule. will change latter to command line
+
     FIR_modules.district_selection(name, driver=driver)
 
-    # creation of list. This list will be converted to dictionary to write to csv
-    total_records_dictionary = []
+    # creation of lists. These lists will be converted to dictionary to write to csv
+    dist_name.append(name)
     poa_dictionary = []
     # call the value of records to view @ 50
     time.sleep(1)
     FIR_modules.view_record(driver)
     # call search
     FIR_modules.search(driver=driver)
-    time.sleep(1)
+    time.sleep(2)
     record = FIR_modules.number_of_records(driver=driver)
+    # for terminal output
+    dist_total.append(record)
     if record == '':
         print(f'page not loaded for \n'
               f'{name} @ {name} \n\n\n')
@@ -138,6 +138,9 @@ for name in ALL_Districts:
         print('no poa')
 
     else:
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
+        print(number_of_cases_on_page, number_of_cases_on_all_pages)
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
 
@@ -147,6 +150,7 @@ for name in ALL_Districts:
     else:
         driver.quit()
         print(f'{name} finished')
+        dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
                                           poa_dir_police,
@@ -160,6 +164,9 @@ for name in ALL_Districts:
 
     else:
         print("PoA")
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
+        print(number_of_cases_on_page, number_of_cases_on_all_pages)
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
 
@@ -169,6 +176,7 @@ for name in ALL_Districts:
     else:
         driver.quit()
         print(f'{name} finished')
+        dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
                                           poa_dir_police,
@@ -180,6 +188,8 @@ for name in ALL_Districts:
         print('no poa')
     else:
         print("PoA")
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
 
@@ -189,6 +199,7 @@ for name in ALL_Districts:
     else:
         driver.quit()
         print(f'{name} finished')
+        dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
                                           poa_dir_police,
@@ -201,6 +212,8 @@ for name in ALL_Districts:
 
     else:
         print("PoA")
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
     if int(record) > 200:
@@ -209,6 +222,7 @@ for name in ALL_Districts:
     else:
         driver.quit()
         print(f'{name} finished')
+        dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
     time.sleep(3)
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
@@ -221,6 +235,9 @@ for name in ALL_Districts:
         print('no poa')
     else:
         print("PoA")
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
+        print(number_of_cases_on_page, number_of_cases_on_all_pages)
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
     if int(record) > 250:
@@ -229,6 +246,7 @@ for name in ALL_Districts:
     else:
         driver.quit()
         print(f'{name} finished')
+        dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
     time.sleep(3)
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
@@ -241,6 +259,8 @@ for name in ALL_Districts:
         print('no poa')
     else:
         print("PoA")
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
     if int(record) > 300:
@@ -249,8 +269,9 @@ for name in ALL_Districts:
     else:
         driver.quit()
         print(f'{name} finished')
+        dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-    time.sleep(3)
+
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
                                           poa_dir_police,
                                           poa_dir_year,
@@ -261,6 +282,8 @@ for name in ALL_Districts:
         print('no poa')
     else:
         print("PoA")
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
     if int(record) > 350:
@@ -269,6 +292,7 @@ for name in ALL_Districts:
     else:
         driver.quit()
         print(f'{name} finished')
+        dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
                                           poa_dir_police,
@@ -278,6 +302,8 @@ for name in ALL_Districts:
                                           poa_dir_sec)
     if poa_cases:
         print("PoA")
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
 
@@ -290,6 +316,7 @@ for name in ALL_Districts:
     else:
         driver.quit()
         print(f'{name} finished')
+        dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
     time.sleep(3)
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
@@ -300,6 +327,8 @@ for name in ALL_Districts:
                                           poa_dir_sec)
     if poa_cases:
         print("PoA")
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
     else:
@@ -310,8 +339,9 @@ for name in ALL_Districts:
     else:
         driver.quit()
         print(f'{name} finished')
+        dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-    time.sleep(3)
+
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
                                           poa_dir_police,
                                           poa_dir_year,
@@ -320,6 +350,8 @@ for name in ALL_Districts:
                                           poa_dir_sec)
     if poa_cases:
         print("PoA")
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
 
@@ -332,8 +364,9 @@ for name in ALL_Districts:
     else:
         driver.quit()
         print(f'{name} finished')
+        dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-    time.sleep(3)
+
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
                                           poa_dir_police,
                                           poa_dir_year,
@@ -345,15 +378,20 @@ for name in ALL_Districts:
 
     else:
         print("PoA")
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
 
     if int(record) > 550:
         print('going to 12th page')
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
         FIR_modules.twelth_page(driver)
     else:
         driver.quit()
         print(f'{name} finished')
+        dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
     time.sleep(3)
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
@@ -364,6 +402,8 @@ for name in ALL_Districts:
                                           poa_dir_sec)
     if poa_cases:
         print("PoA")
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
     else:
@@ -375,6 +415,7 @@ for name in ALL_Districts:
     else:
         driver.quit()
         print(f'{name} finished')
+        dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
                                           poa_dir_police,
@@ -384,6 +425,8 @@ for name in ALL_Districts:
                                           poa_dir_sec)
     if poa_cases:
         print("PoA")
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
 
@@ -396,6 +439,7 @@ for name in ALL_Districts:
     else:
         driver.quit()
         print(f'{name} finished')
+        dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
     time.sleep(3)
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
@@ -406,6 +450,8 @@ for name in ALL_Districts:
                                           poa_dir_sec)
     if poa_cases:
         print("PoA")
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
     else:
@@ -417,6 +463,7 @@ for name in ALL_Districts:
     else:
         driver.quit()
         print(f'{name} finished')
+        dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
     time.sleep(3)
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
@@ -427,6 +474,8 @@ for name in ALL_Districts:
                                           poa_dir_sec)
     if poa_cases:
         print("PoA")
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
     else:
@@ -438,8 +487,8 @@ for name in ALL_Districts:
     else:
         driver.quit()
         print(f'{name} finished')
+        dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-    time.sleep(3)
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
                                           poa_dir_police,
                                           poa_dir_year,
@@ -448,6 +497,8 @@ for name in ALL_Districts:
                                           poa_dir_sec)
     if poa_cases:
         print("PoA")
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
     else:
@@ -459,6 +510,7 @@ for name in ALL_Districts:
     else:
         driver.quit()
         print(f'{name} finished')
+        dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
                                           poa_dir_police,
@@ -468,6 +520,8 @@ for name in ALL_Districts:
                                           poa_dir_sec)
     if poa_cases:
         print("PoA")
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
     else:
@@ -479,6 +533,7 @@ for name in ALL_Districts:
     else:
         driver.quit()
         print(f'{name} finished')
+        dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
     time.sleep(3)
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
@@ -489,6 +544,8 @@ for name in ALL_Districts:
                                           poa_dir_sec)
     if poa_cases:
         print("PoA")
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
     else:
@@ -500,28 +557,7 @@ for name in ALL_Districts:
     else:
         driver.quit()
         print(f'{name} finished')
-        continue
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if poa_cases:
-        print("PoA")
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
-
-    else:
-        print('no poa')
-
-    if int(record) > 950:
-        print('going to 20th page')
-        FIR_modules.twenty_page(driver)
-
-    else:
-        driver.quit()
-        print(f'{name} finished')
+        dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
                                           poa_dir_police,
@@ -531,6 +567,34 @@ for name in ALL_Districts:
                                           poa_dir_sec)
     if not poa_cases:
         print('no poa')
+
+    else:
+        print("PoA")
+        time.sleep(3)
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
+        FIR_modules.download_repeat(poa_cases, driver,
+                                    )
+
+    if int(record) > 950:
+        print('going to 20th page')
+        FIR_modules.twenty_page(driver)
+
+    else:
+        driver.quit()
+        print(f'{name} finished')
+        dist_poa.append(sum(number_of_cases_on_all_pages))
+        continue
+    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                          poa_dir_police,
+                                          poa_dir_year,
+                                          poa_dir_FIR,
+                                          poa_dir_date,
+                                          poa_dir_sec)
+    if not poa_cases:
+        print('no poa')
+        number_of_cases_on_page = int(len(poa_cases))
+        number_of_cases_on_all_pages.append(number_of_cases_on_page)
         driver.quit()
         print(f'{name} finished')
         continue
@@ -539,17 +603,18 @@ for name in ALL_Districts:
         print("PoA")
         FIR_modules.download_repeat(poa_cases, driver,
                                     )
-
-        total_records_dictionary.append(record)
         poa_dictionary.append(len(poa_cases))
-
+    dist_poa.append(sum(number_of_cases_on_all_pages))
+    print(dist_poa)
     driver.quit()
 
+terminal_dir = {"District": dist_name, "Total": dist_total, "PoA": dist_poa}
 poa_dir = {"District": poa_dir_district, "Police_Station": poa_dir_police,
            "FIR": poa_dir_FIR, "Date_&_Time": poa_dir_date, "Acts_&_Sections": poa_dir_sec}
-
+terminal_df = pd.DataFrame({key: pd.Series(value) for key, value in terminal_dir.items()})
 df = pd.DataFrame(
     {key: pd.Series(value) for key, value in poa_dir.items()})
-print(df)
+print(terminal_df)
+terminal_df.to_csv(os.path.join(base_directory, f'statistical_summary_from_{argv[1]}_to_{argv[2]}.csv'))
 df.to_csv(
     os.path.join(base_directory, "poa_summary", f'{argv[3]}_from_{argv[1]}_to_{argv[2]}.csv'))
