@@ -127,12 +127,12 @@ def download_repeat(some_list, driver,
 
                 else:
                     continue
-        print(f'number of PoA cases {len(new_list)} downloading'
-              f'{i}')
+
+        print(f'number of PoA cases {len(new_list)} downloading '
+              f'{i+1}')
         new_list[i].click()
-        time.sleep(3)
+        time.sleep(2)
         print('finished')
-        # driver.switch_to.window(main_window)
         i += 1
 
 

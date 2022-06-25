@@ -30,7 +30,7 @@ if not download_directory:
 main_url = r'https://citizen.mahapolice.gov.in/Citizen/MH/PublishedFIRs.aspx'
 
 # list of districts
-ALL_Districts = ['AHMEDNAGAR', 'AKOLA', 'AMRAVATI CITY', 'AMRAVATI RURAL', 'AURANGABAD CITY',
+ALL_Districts = ['AMRAVATI RURAL', 'AURANGABAD CITY',
                  'AURANGABAD RURAL', 'BEED', 'BHANDARA', 'BRIHAN MUMBAI CITY', 'BULDHANA',
                  'CHANDRAPUR', 'DHULE', 'GADCHIROLI', 'GONDIA', 'HINGOLI', 'JALGAON', 'JALNA',
                  'KOLHAPUR', 'LATUR', 'NAGPUR CITY', 'NAGPUR RURAL', 'NANDED', 'NANDURBAR',
@@ -98,7 +98,7 @@ for name in ALL_Districts:
 
     driver = webdriver.Firefox(options=options, proxy=proxy)
     open_page()
-    print(f'{name} in progress')
+    print(f'\n {name} in progress')
     FIR_modules.enter_date(date1=argv[1], date2=argv[2], driver=driver)
     # call function district, for now its Dhule. will change latter to command line
     FIR_modules.district_selection(name, driver=driver)
