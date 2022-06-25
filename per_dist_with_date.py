@@ -154,7 +154,8 @@ for name in ALL_Districts:
                                     )
 
     if int(record) > 50:
-        print('page 2')
+        print('going to page 2')
+        time.sleep(2)
         FIR_modules.second_page(driver)
     else:
         driver.quit()
@@ -181,6 +182,7 @@ for name in ALL_Districts:
 
     if int(record) > 100:
         print('going to page 3')
+        time.sleep(2)
         FIR_modules.third_page(driver)
     else:
         driver.quit()
@@ -204,6 +206,7 @@ for name in ALL_Districts:
 
     if int(record) > 150:
         print('going to page 4')
+        time.sleep(2)
         FIR_modules.forth_page(driver)
     else:
         driver.quit()
@@ -227,6 +230,7 @@ for name in ALL_Districts:
                                     )
     if int(record) > 200:
         print('going to page 5')
+        time.sleep(2)
         FIR_modules.fifth_page(driver)
     else:
         driver.quit()
@@ -251,6 +255,7 @@ for name in ALL_Districts:
                                     )
     if int(record) > 250:
         print('going to page 6')
+        time.sleep(2)
         FIR_modules.sixth_page(driver)
     else:
         driver.quit()
@@ -274,6 +279,7 @@ for name in ALL_Districts:
                                     )
     if int(record) > 300:
         print('going to page 7')
+        time.sleep(2)
         FIR_modules.seventh_page(driver)
     else:
         driver.quit()
@@ -297,6 +303,7 @@ for name in ALL_Districts:
                                     )
     if int(record) > 350:
         print('going to page 8')
+        time.sleep(2)
         FIR_modules.eightth_page(driver)
     else:
         driver.quit()
@@ -321,6 +328,7 @@ for name in ALL_Districts:
 
     if int(record) > 400:
         print('going to page 9')
+        time.sleep(2)
         FIR_modules.ninenth_page(driver)
     else:
         driver.quit()
@@ -344,6 +352,7 @@ for name in ALL_Districts:
         print('no poa')
     if int(record) > 450:
         print('going to page 10')
+        time.sleep(2)
         FIR_modules.tenth_page(driver)
     else:
         driver.quit()
@@ -369,6 +378,7 @@ for name in ALL_Districts:
 
     if int(record) > 500:
         print('going to 11th page')
+        time.sleep(2)
         FIR_modules.next_page(driver)
     else:
         driver.quit()
@@ -394,6 +404,7 @@ for name in ALL_Districts:
 
     if int(record) > 550:
         print('going to 12th page')
+        time.sleep(2)
         number_of_cases_on_page = int(len(poa_cases))
         number_of_cases_on_all_pages.append(number_of_cases_on_page)
         FIR_modules.twelth_page(driver)
@@ -420,6 +431,7 @@ for name in ALL_Districts:
 
     if int(record) > 600:
         print('going to 13th page')
+        time.sleep(2)
         FIR_modules.thirteen_page(driver)
     else:
         driver.quit()
@@ -444,6 +456,7 @@ for name in ALL_Districts:
 
     if int(record) > 650:
         print('going to 14th page')
+        time.sleep(2)
         FIR_modules.fourteen_page(driver)
     else:
         driver.quit()
@@ -468,6 +481,7 @@ for name in ALL_Districts:
 
     if int(record) > 700:
         print('going to 15th page')
+        time.sleep(2)
         FIR_modules.next_page(driver)
     else:
         driver.quit()
@@ -492,6 +506,7 @@ for name in ALL_Districts:
 
     if int(record) > 750:
         print('going to 16th page')
+        time.sleep(2)
         FIR_modules.sixteen_page(driver)
     else:
         driver.quit()
@@ -515,6 +530,7 @@ for name in ALL_Districts:
 
     if int(record) > 800:
         print('going to 17th page')
+        time.sleep(2)
         FIR_modules.seventeen_page(driver)
     else:
         driver.quit()
@@ -538,6 +554,7 @@ for name in ALL_Districts:
 
     if int(record) > 850:
         print('going to 18th page')
+        time.sleep(2)
         FIR_modules.eighteen_page(driver)
     else:
         driver.quit()
@@ -562,6 +579,7 @@ for name in ALL_Districts:
 
     if int(record) > 900:
         print('going to 19th page')
+        time.sleep(2)
         FIR_modules.ninteen_page(driver)
     else:
         driver.quit()
@@ -587,6 +605,7 @@ for name in ALL_Districts:
 
     if int(record) > 950:
         print('going to 20th page')
+        time.sleep(2)
         FIR_modules.twenty_page(driver)
 
     else:
