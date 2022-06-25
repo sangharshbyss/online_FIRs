@@ -2,7 +2,6 @@ import time
 
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
@@ -30,7 +29,7 @@ def enter_date(date1, date2, driver):
 # 3 select district and enter
 def district_selection(dist_name, driver):
     dist_list = Select(driver.find_element(By.CSS_SELECTOR,
-        "#ContentPlaceHolder1_ddlDistrict"))
+                                           "#ContentPlaceHolder1_ddlDistrict"))
 
     dist_list.select_by_visible_text(dist_name)
 
@@ -77,7 +76,7 @@ def number_of_records(driver):
 def check_the_act(driver, poa_dir_district,
                   poa_dir_police,
                   poa_dir_year,
-                  poa_dir_FIR,
+                  poa_dir_fir,
                   poa_dir_date,
                   poa_dir_sec):
     poa_list = []
@@ -101,7 +100,7 @@ def check_the_act(driver, poa_dir_district,
                 poa_dir_district.append(cells[2].text)
                 poa_dir_police.append(cells[3].text)
                 poa_dir_year.append(cells[4].text)
-                poa_dir_FIR.append(cells[5].text)
+                poa_dir_fir.append(cells[5].text)
                 poa_dir_date.append(cells[6].text)
                 poa_dir_sec.append(cells[8].text)
 
@@ -128,182 +127,179 @@ def download_repeat(some_list, driver,
 
                 else:
                     continue
-        print(len(new_list))
-        print('downloading...')
+        print(f'number of PoA cases {len(new_list)} downloading'
+              f'{i}')
         new_list[i].click()
         time.sleep(3)
-        driver.close()
         print('finished')
-        #driver.switch_to.window(main_window)
+        # driver.switch_to.window(main_window)
         i += 1
 
 
 def second_page(driver):
     p2 = driver.find_element(By.XPATH,
-        '/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table/'
-        'tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody/tr[52]'
-        '/td/table/tbody/tr/td[2]/a')
+                             '/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table/'
+                             'tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody/tr[52]'
+                             '/td/table/tbody/tr/td[2]/a')
     p2.click()
 
 
 def third_page(driver):
     p3 = driver.find_element(By.XPATH,
-        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/"
-        "table/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table"
-        "/tbody/tr[52]/td/table/tbody/tr/td[3]/a"
-    )
+                             "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/"
+                             "table/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table"
+                             "/tbody/tr[52]/td/table/tbody/tr/td[3]/a"
+                             )
     p3.click()
 
 
 def forth_page(driver):
     p4 = driver.find_element(By.XPATH,
-        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
-        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
-        "/tr[52]/td/table/tbody/tr/td[4]/a"
-    )
+                             "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+                             "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+                             "/tr[52]/td/table/tbody/tr/td[4]/a"
+                             )
     p4.click()
+
 
 def fifth_page(driver):
     p5 = driver.find_element(By.XPATH,
-        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
-        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
-        "/tr[52]/td/table/tbody/tr/td[5]/a"
-        )
+                             "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+                             "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+                             "/tr[52]/td/table/tbody/tr/td[5]/a"
+                             )
     p5.click()
+
 
 def sixth_page(driver):
     p6 = driver.find_element(By.XPATH,
-        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
-        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
-        "/tr[52]/td/table/tbody/tr/td[6]/a"
-    )
+                             "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+                             "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+                             "/tr[52]/td/table/tbody/tr/td[6]/a"
+                             )
     p6.click()
-
 
 
 def seventh_page(driver):
     p7 = driver.find_element(By.XPATH,
-        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table/"
-        "tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
-        "/tr[52]/td/table/tbody/tr/td[7]/a"
-    )
+                             "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table/"
+                             "tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+                             "/tr[52]/td/table/tbody/tr/td[7]/a"
+                             )
     p7.click()
 
 
 def eightth_page(driver):
     p8 = driver.find_element(By.XPATH,
-        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
-        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
-        "/tr[52]/td/table/tbody/tr/td[8]/a"
-    )
+                             "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+                             "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+                             "/tr[52]/td/table/tbody/tr/td[8]/a"
+                             )
     p8.click()
 
 
 def ninenth_page(driver):
     p9 = driver.find_element(By.XPATH,
-        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
-        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
-        "/tr[52]/td/table/tbody/tr/td[9]/a"
-    )
+                             "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+                             "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+                             "/tr[52]/td/table/tbody/tr/td[9]/a"
+                             )
     p9.click()
 
 
 def tenth_page(driver):
     p10 = driver.find_element(By.XPATH,
-        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
-        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
-        "/tr[52]/td/table/tbody/tr/td[10]/a"
-    )
+                              "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+                              "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+                              "/tr[52]/td/table/tbody/tr/td[10]/a"
+                              )
     p10.click()
 
 
 def next_page(driver):
     next_p = driver.find_element(By.XPATH, "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
-        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
-        "/tr[52]/td/table/tbody/tr/td[11]/a"
-    )
+                                           "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+                                           "/tr[52]/td/table/tbody/tr/td[11]/a"
+                                 )
     next_p.click()
 
 
 def twelth_page(driver):
     p12 = driver.find_element(By.XPATH,
-        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
-        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
-        "/tr[52]/td/table/tbody/tr/td[3]/a"
-    )
+                              "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+                              "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+                              "/tr[52]/td/table/tbody/tr/td[3]/a"
+                              )
     p12.click()
 
 
 def thirteen_page(driver):
     p13 = driver.find_element(By.XPATH,
-        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
-        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
-        "/tr[52]/td/table/tbody/tr/td[4]/a"
-    )
+                              "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+                              "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+                              "/tr[52]/td/table/tbody/tr/td[4]/a"
+                              )
     p13.click()
 
 
 def fourteen_page(driver):
     p14 = driver.find_element(By.XPATH,
-        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
-        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
-        "/tr[52]/td/table/tbody/tr/td[5]/a"
-    )
+                              "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+                              "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+                              "/tr[52]/td/table/tbody/tr/td[5]/a"
+                              )
     p14.click()
 
 
 def fifteen_pagge(driver):
     p15 = driver.find_element(By.XPATH,
-        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
-        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
-        "/tr[52]/td/table/tbody/tr/td[6]/a"
-    )
+                              "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+                              "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+                              "/tr[52]/td/table/tbody/tr/td[6]/a"
+                              )
     p15.click()
 
 
 def sixteen_page(driver):
     p16 = driver.find_element(By.XPATH,
-        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
-        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
-        "/tr[52]/td/table/tbody/tr/td[7]/a"
-    )
+                              "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+                              "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+                              "/tr[52]/td/table/tbody/tr/td[7]/a"
+                              )
     p16.click()
 
 
 def seventeen_page(driver):
     p17 = driver.find_element(By.XPATH,
-        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
-        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
-        "/tr[52]/td/table/tbody/tr/td[8]/a"
-    )
+                              "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+                              "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+                              "/tr[52]/td/table/tbody/tr/td[8]/a"
+                              )
     p17.click()
 
 
 def eighteen_page(driver):
     p18 = driver.find_element(By.XPATH,
-        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
-        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
-        "/tr[52]/td/table/tbody/tr/td[9]/a"
-    )
+                              "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+                              "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+                              "/tr[52]/td/table/tbody/tr/td[9]/a"
+                              )
     p18.click()
 
 
 def ninteen_page(driver):
     p19 = driver.find_element(By.XPATH,
-        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
-        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
-        "/tr[52]/td/table/tbody/tr/td[10]/a"
-    )
+                              "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+                              "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+                              "/tr[52]/td/table/tbody/tr/td[10]/a"
+                              )
     p19.click()
 
 
 def twenty_page(driver):
     p20 = driver.find_element(By.XPATH,
-        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
-        "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
-        "/tr[52]/td/table/tbody/tr/td[11]/a"
-    )
+                              "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+                              "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
+                              "/tr[52]/td/table/tbody/tr/td[11]/a"
+                              )
     p20.click()
-
-
-

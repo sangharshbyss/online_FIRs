@@ -1,0 +1,173 @@
+1656126689032	geckodriver	INFO	Listening on 127.0.0.1:37027
+1656126689035	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "--remote-debugging-port" "53421" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofile03UDiV"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1656126689351	Marionette	INFO	Marionette enabled
+WebDriver BiDi listening on ws://localhost:53421
+ATTENTION: default value of option mesa_glthread overridden by environment.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofile03UDiV/search.json.mozlz4", (void 0)))
+1656126690077	Marionette	INFO	Listening on port 35723
+DevTools listening on ws://localhost:53421/devtools/browser/21e4b475-be02-4996-9bc7-cfe9c06491a5
+Read port: 35723
+1656126690145	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+1656126712726	Marionette	INFO	Stopped listening on port 35723
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+Sandbox: Unexpected EOF, op 0 flags 00 path /proc/cpuinfo
+1656126713077	geckodriver	INFO	Listening on 127.0.0.1:56915
+1656126713580	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "--remote-debugging-port" "36735" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileSZU9zq"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1656126713906	Marionette	INFO	Marionette enabled
+WebDriver BiDi listening on ws://localhost:36735
+ATTENTION: default value of option mesa_glthread overridden by environment.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileSZU9zq/search.json.mozlz4", (void 0)))
+1656126714570	Marionette	INFO	Listening on port 37599
+Read port: 37599
+DevTools listening on ws://localhost:36735/devtools/browser/793a34b2-f3c5-43d5-9ff8-d4d98b081467
+1656126714589	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+1656126728923	Marionette	INFO	Stopped listening on port 37599
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+Sandbox: Unexpected EOF, op 0 flags 00 path /proc/cpuinfo
+1656126729275	geckodriver	INFO	Listening on 127.0.0.1:49957
+1656126729778	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "--remote-debugging-port" "35081" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilekRY5rC"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1656126730107	Marionette	INFO	Marionette enabled
+WebDriver BiDi listening on ws://localhost:35081
+ATTENTION: default value of option mesa_glthread overridden by environment.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofilekRY5rC/search.json.mozlz4", (void 0)))
+1656126730848	Marionette	INFO	Listening on port 33415
+DevTools listening on ws://localhost:35081/devtools/browser/1cd12b08-3854-499f-88a7-9f91578eab51
+Read port: 33415
+1656126730891	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+1656126742557	Marionette	INFO	Stopped listening on port 33415
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+Sandbox: Unexpected EOF, op 0 flags 00 path /proc/cpuinfo
+1656126742906	geckodriver	INFO	Listening on 127.0.0.1:37939
+1656126743410	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "--remote-debugging-port" "33359" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileHju5Wk"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1656126743724	Marionette	INFO	Marionette enabled
+WebDriver BiDi listening on ws://localhost:33359
+ATTENTION: default value of option mesa_glthread overridden by environment.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileHju5Wk/search.json.mozlz4", (void 0)))
+1656126744429	Marionette	INFO	Listening on port 45967
+DevTools listening on ws://localhost:33359/devtools/browser/4db0de7e-4ea0-40fe-92fa-c60fe42908ac
+Read port: 45967
+1656126744525	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+1656126766918	Marionette	INFO	Stopped listening on port 45967
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+Sandbox: Unexpected EOF, op 0 flags 00 path /proc/cpuinfo
+1656126767266	geckodriver	INFO	Listening on 127.0.0.1:51633
+1656126767770	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "--remote-debugging-port" "41705" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileQ2AGzF"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1656126768094	Marionette	INFO	Marionette enabled
+WebDriver BiDi listening on ws://localhost:41705
+ATTENTION: default value of option mesa_glthread overridden by environment.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileQ2AGzF/search.json.mozlz4", (void 0)))
+1656126768814	Marionette	INFO	Listening on port 43995
+DevTools listening on ws://localhost:41705/devtools/browser/4ba4eb00-d2fa-4095-b00e-70d3fb37a9cd
+Read port: 43995
+1656126768879	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+1656126795053	Marionette	INFO	Stopped listening on port 43995
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+Sandbox: Unexpected EOF, op 0 flags 00 path /proc/cpuinfo
+1656126795398	geckodriver	INFO	Listening on 127.0.0.1:54805
+1656126795902	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "--remote-debugging-port" "45547" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileL07cW2"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1656126796222	Marionette	INFO	Marionette enabled
+WebDriver BiDi listening on ws://localhost:45547
+ATTENTION: default value of option mesa_glthread overridden by environment.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileL07cW2/search.json.mozlz4", (void 0)))
+1656126796961	Marionette	INFO	Listening on port 33959
+DevTools listening on ws://localhost:45547/devtools/browser/9c25e3e0-c5b8-4f04-a0c5-1a8402203d63
+Read port: 33959
+1656126797011	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+1656126816059	Marionette	INFO	Stopped listening on port 33959
+
+###!!! [Parent][PImageBridgeParent] Error: RunMessage(msgname=PImageBridge::Msg_WillClose) Channel closing: too late to send/recv, messages will be lost
+
+Sandbox: Unexpected EOF, op 0 flags 00 path /proc/cpuinfo
+1656126816408	geckodriver	INFO	Listening on 127.0.0.1:59623
+1656126816911	mozrunner::runner	INFO	Running command: "/usr/local/bin/firefox" "--marionette" "--remote-debugging-port" "55683" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofileYQXPKm"
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+1656126817230	Marionette	INFO	Marionette enabled
+WebDriver BiDi listening on ws://localhost:55683
+ATTENTION: default value of option mesa_glthread overridden by environment.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileYQXPKm/search.json.mozlz4", (void 0)))
+1656126817875	Marionette	INFO	Listening on port 36671
+DevTools listening on ws://localhost:55683/devtools/browser/d2291d2d-a93b-47ac-bf86-c4bd55743f09
+Read port: 36671
+1656126817922	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://citizen.mahapolice.gov.in"
+JavaScript warning: https://citizen.mahapolice.gov.in/Citizen/JS/jquery.js, line 3686: unreachable code after return statement
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
