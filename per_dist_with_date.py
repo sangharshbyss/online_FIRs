@@ -31,7 +31,7 @@ main_url = r'https://citizen.mahapolice.gov.in/Citizen/MH/PublishedFIRs.aspx'
 
 # list of districts
 ALL_Districts = ['AMRAVATI RURAL', 'AURANGABAD CITY', 'AURANGABAD RURAL', 'BEED',
-                 'BHANDARA', 'BRIHAN MUMBAI CITY', 'BULDHANA', 'CHANDRAPUR', 'DHULE',
+                 'BHANDARA', 'BULDHANA', 'CHANDRAPUR', 'DHULE',
                  'GADCHIROLI', 'GONDIA', 'HINGOLI', 'JALGAON', 'JALNA', 'KOLHAPUR',
                  'LATUR', 'Mira-Bhayandar, Vasai-Virar Police Commissioner','NAGPUR CITY',
                  'NAGPUR RURAL', 'NANDED', 'NANDURBAR', 'NASHIK CITY', 'NASHIK RURAL',
