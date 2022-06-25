@@ -20,13 +20,16 @@ from selenium.common.exceptions import NoSuchElementException, \
     WebDriverException
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 from urllib3.exceptions import MaxRetryError, NewConnectionError
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.firefox.service import Service
+from selenium.webdriver import Firefox
 
 import FIR_modules
-from proxies2 import list_of_proxies
+from proxies3 import list_of_proxies
 
 # constants
 # define download directory
-base_directory = r'/home/sangharsh/Documents/PoA/data/FIR/April'
+base_directory = r'/home/sangharsh/Documents/PoA/data/FIR/April_22'
 download_directory = os.path.join(base_directory, "copies", f'{argv[1]} _ {argv[2]}')
 
 if not download_directory:
@@ -77,20 +80,24 @@ for name in ALL_Districts:
     profile = webdriver.FirefoxProfile()
     # set profile for saving directly without pop-up ref -
     # https://stackoverflow.com/a/29777967
-    profile.set_preference("browser.download.panel.shown", False)
-    profile.set_preference("browser.download.manager.showWhenStarting", False)
+    options = Options()
+
+    options.set_preference("browser.download.panel.shown", False)
+    options.set_preference("browser.download.manager.showWhenStarting", False)
     # profile.set_preference("browser.helperApps.neverAsk.openFile","application/pdf")
-    profile.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/pdf")
-    profile.set_preference("browser.download.folderList", 2)
-    profile.set_preference("browser.download.dir", download_directory)
+    options.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/pdf")
+    options.set_preference("browser.download.folderList", 2)
+    options.set_preference("browser.download.dir", download_directory)
     # to go undetected
-    profile.set_preference("general.useragent.override",
+    options.set_preference("general.useragent.override",
                            "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:82.0) "
                            "Gecko/20100101 Firefox/82.0")
-    profile.set_preference("dom.webdriver.enabled", False)
-    profile.set_preference('useAutomationExtension', False)
-    profile.set_preference("pdfjs.disabled", True)
-    profile.update_preferences()
+    options.set_preference("dom.webdriver.enabled", False)
+    options.set_preference('useAutomationExtension', False)
+    options.set_preference("pdfjs.disabled", True)
+    #profile.update_preferences()
+    service = Service('C:\\BrowserDrivers\\geckodriver.exe')
+
     # change IP
     myProxy = list_of_proxies()
     proxy = Proxy({
@@ -100,17 +107,9 @@ for name in ALL_Districts:
         'sslProxy': myProxy[ALL_Districts.index(name)],
         'noProxy': ''  # set this value as desired
     })
-    try:
-        driver = webdriver.Firefox(firefox_profile=profile, proxy=proxy)
-        open_page()
-    except (NoSuchElementException,
-            WebDriverException,
-            TimeoutException, ConnectionRefusedError,
-            MaxRetryError, ConnectionError, NewConnectionError):
-        print(f'bug @ {name}, driver did not open')
-        continue
 
-    # call function for entering date, set the date through command line
+    driver = webdriver.Firefox(options=options, proxy=proxy)
+    open_page()
     FIR_modules.enter_date(date1=argv[1], date2=argv[2], driver=driver)
     # call function district, for now its Dhule. will change latter to command line
     FIR_modules.district_selection(name, driver=driver)
@@ -298,7 +297,6 @@ for name in ALL_Districts:
                                           poa_dir_sec)
     if not poa_cases:
         print('no poa')
-
 
     else:
         print("PoA")
@@ -582,7 +580,7 @@ mha_records = {"Date": mha_date,
 df = pd.DataFrame(
     {key: pd.Series(value) for key, value in mha_records.items()})
 df.to_csv(
-    os.path.join(base_directory, "summary", f'{argv[5]}_{argv[1]} to {argv[2]}.csv'))
+    os.path.join(base_directory, "summary", f'{argv[3]}_{argv[1]} to {argv[2]}.csv'))
 poa_dir = {"District": poa_dir_district, "Police_Station": poa_dir_police,
            "FIR": poa_dir_FIR, "Date_&_Time": poa_dir_date, "Acts_&_Sections": poa_dir_sec}
 
@@ -590,4 +588,4 @@ df = pd.DataFrame(
     {key: pd.Series(value) for key, value in poa_dir.items()})
 print(df)
 df.to_csv(
-    os.path.join(base_directory, "poa_summary", f'{argv[5]}_from_{argv[1]}_to_{argv[2]}.csv'))
+    os.path.join(base_directory, "poa_summary", f'{argv[3]}_from_{argv[1]}_to_{argv[2]}.csv'))

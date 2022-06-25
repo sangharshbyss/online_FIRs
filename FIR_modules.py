@@ -17,11 +17,10 @@ def enter_date(date1, date2, driver):
     WebDriverWait(driver, 160).until(
         ec.presence_of_element_located((By.CSS_SELECTOR,
                                         '#ContentPlaceHolder1_txtDateOfRegistrationFrom')))
-    from_date_field = driver.find_element_by_css_selector(
-        '#ContentPlaceHolder1_txtDateOfRegistrationFrom')
 
-    to_date_field = driver.find_element_by_css_selector(
-        '#ContentPlaceHolder1_txtDateOfRegistrationTo')
+    from_date_field = driver.find_element(By.ID, "ContentPlaceHolder1_txtDateOfRegistrationFrom")
+
+    to_date_field = driver.find_element(By.ID, "ContentPlaceHolder1_txtDateOfRegistrationTo")
 
     ActionChains(driver).click(from_date_field).send_keys(
         date1).move_to_element(to_date_field).click().send_keys(
@@ -30,7 +29,7 @@ def enter_date(date1, date2, driver):
 
 # 3 select district and enter
 def district_selection(dist_name, driver):
-    dist_list = Select(driver.find_element_by_css_selector(
+    dist_list = Select(driver.find_element(By.CSS_SELECTOR,
         "#ContentPlaceHolder1_ddlDistrict"))
 
     dist_list.select_by_visible_text(dist_name)
@@ -41,7 +40,7 @@ def police_stations(driver):
     WebDriverWait(driver, 160).until(
         ec.presence_of_element_located((By.CSS_SELECTOR,
                                         '#ContentPlaceHolder1_ddlPoliceStation')))
-    select_box = driver.find_element_by_css_selector("#ContentPlaceHolder1_ddlPoliceStation")
+    select_box = driver.find_element(By.CSS_SELECTOR, "#ContentPlaceHolder1_ddlPoliceStation")
     all_police_stations = [
         x.text for x in select_box.find_elements_by_tag_name("option") if x.text != "Select"]
     return all_police_stations
@@ -51,26 +50,26 @@ def police_stations(driver):
 def select_police_station(selected_police, driver):
     # this will select police station as per there names listed in
     # list created by police_stations() function.
-    police_list = Select(driver.find_element_by_css_selector(
-        '#ContentPlaceHolder1_ddlPoliceStation'))
+    police_list = Select(driver.find_element(By.CSS_SELECTOR,
+                                             '#ContentPlaceHolder1_ddlPoliceStation'))
     police_list.select_by_visible_text(selected_police)
 
 
 # 5. view 50 records at a time
 def view_record(driver):
-    view = Select(driver.find_element_by_id('ContentPlaceHolder1_ucRecordView_ddlPageSize'))
+    view = Select(driver.find_element(By.ID, 'ContentPlaceHolder1_ucRecordView_ddlPageSize'))
     view.select_by_value("50")
 
 
 # 4. function for click on search
 def search(driver):
-    driver.find_element_by_css_selector('#ContentPlaceHolder1_btnSearch').click()
+    driver.find_element(By.CSS_SELECTOR, '#ContentPlaceHolder1_btnSearch').click()
     time.sleep(4)
 
 
 def number_of_records(driver):
-    total_number = driver.find_element_by_css_selector(
-        '#ContentPlaceHolder1_lbltotalrecord').text
+    total_number = driver.find_element(By.CSS_SELECTOR,
+                                       '#ContentPlaceHolder1_lbltotalrecord').text
     return total_number
 
 
@@ -116,7 +115,6 @@ def download_repeat(some_list, driver,
         time.sleep(2)
         table = driver.find_element(By.ID, "ContentPlaceHolder1_gdvDeadBody")
         rows = table.find_elements(By.TAG_NAME, "tr")
-        main_window = driver.current_window_handle
         new_list = []
         for row in rows:
             cells = row.find_elements(By.TAG_NAME, "td")
@@ -130,32 +128,18 @@ def download_repeat(some_list, driver,
 
                 else:
                     continue
+        print(len(new_list))
         print('downloading...')
-        time.sleep(2)
         new_list[i].click()
-        time.sleep(10)
-        for handle in driver.window_handles:
-            if handle != main_window:
-                download_window = handle
-                # we are in main window, so go to next window
-                driver.switch_to.window(download_window)
-        driver.find_element_by_id(
-            "ReportViewer1_ctl06_ctl04_ctl00_ButtonImgDown").click()
-        down_load = driver.find_element_by_css_selector(
-            "#ReportViewer1_ctl06_ctl04_ctl00_Menu > div:nth-child(4) "
-            "> a:nth-child(1)"
-        )
-        time.sleep(8)
-        down_load.send_keys(Keys.ENTER)
-        time.sleep(5)
+        time.sleep(3)
         driver.close()
         print('finished')
-        driver.switch_to.window(main_window)
+        #driver.switch_to.window(main_window)
         i += 1
 
 
 def second_page(driver):
-    p2 = driver.find_element_by_xpath(
+    p2 = driver.find_element(By.XPATH,
         '/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table/'
         'tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody/tr[52]'
         '/td/table/tbody/tr/td[2]/a')
@@ -163,7 +147,7 @@ def second_page(driver):
 
 
 def third_page(driver):
-    p3 = driver.find_element_by_xpath(
+    p3 = driver.find_element(By.XPATH,
         "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/"
         "table/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table"
         "/tbody/tr[52]/td/table/tbody/tr/td[3]/a"
@@ -172,7 +156,7 @@ def third_page(driver):
 
 
 def forth_page(driver):
-    p4 = driver.find_element_by_xpath(
+    p4 = driver.find_element(By.XPATH,
         "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
         "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
         "/tr[52]/td/table/tbody/tr/td[4]/a"
@@ -180,7 +164,7 @@ def forth_page(driver):
     p4.click()
 
 def fifth_page(driver):
-    p5 = driver.find_element_by_xpath(
+    p5 = driver.find_element(By.XPATH,
         "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
         "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
         "/tr[52]/td/table/tbody/tr/td[5]/a"
@@ -188,7 +172,7 @@ def fifth_page(driver):
     p5.click()
 
 def sixth_page(driver):
-    p6 = driver.find_element_by_xpath(
+    p6 = driver.find_element(By.XPATH,
         "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
         "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
         "/tr[52]/td/table/tbody/tr/td[6]/a"
@@ -198,7 +182,7 @@ def sixth_page(driver):
 
 
 def seventh_page(driver):
-    p7 = driver.find_element_by_xpath(
+    p7 = driver.find_element(By.XPATH,
         "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table/"
         "tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
         "/tr[52]/td/table/tbody/tr/td[7]/a"
@@ -207,7 +191,7 @@ def seventh_page(driver):
 
 
 def eightth_page(driver):
-    p8 = driver.find_element_by_xpath(
+    p8 = driver.find_element(By.XPATH,
         "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
         "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
         "/tr[52]/td/table/tbody/tr/td[8]/a"
@@ -216,7 +200,7 @@ def eightth_page(driver):
 
 
 def ninenth_page(driver):
-    p9 = driver.find_element_by_xpath(
+    p9 = driver.find_element(By.XPATH,
         "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
         "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
         "/tr[52]/td/table/tbody/tr/td[9]/a"
@@ -225,7 +209,7 @@ def ninenth_page(driver):
 
 
 def tenth_page(driver):
-    p10 = driver.find_element_by_xpath(
+    p10 = driver.find_element(By.XPATH,
         "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
         "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
         "/tr[52]/td/table/tbody/tr/td[10]/a"
@@ -234,8 +218,7 @@ def tenth_page(driver):
 
 
 def next_page(driver):
-    next_p = driver.find_element_by_xpath(
-        "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
+    next_p = driver.find_element(By.XPATH, "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
         "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
         "/tr[52]/td/table/tbody/tr/td[11]/a"
     )
@@ -243,7 +226,7 @@ def next_page(driver):
 
 
 def twelth_page(driver):
-    p12 = driver.find_element_by_xpath(
+    p12 = driver.find_element(By.XPATH,
         "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
         "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
         "/tr[52]/td/table/tbody/tr/td[3]/a"
@@ -252,7 +235,7 @@ def twelth_page(driver):
 
 
 def thirteen_page(driver):
-    p13 = driver.find_element_by_xpath(
+    p13 = driver.find_element(By.XPATH,
         "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
         "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
         "/tr[52]/td/table/tbody/tr/td[4]/a"
@@ -261,7 +244,7 @@ def thirteen_page(driver):
 
 
 def fourteen_page(driver):
-    p14 = driver.find_element_by_xpath(
+    p14 = driver.find_element(By.XPATH,
         "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
         "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
         "/tr[52]/td/table/tbody/tr/td[5]/a"
@@ -270,7 +253,7 @@ def fourteen_page(driver):
 
 
 def fifteen_pagge(driver):
-    p15 = driver.find_element_by_xpath(
+    p15 = driver.find_element(By.XPATH,
         "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
         "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
         "/tr[52]/td/table/tbody/tr/td[6]/a"
@@ -279,7 +262,7 @@ def fifteen_pagge(driver):
 
 
 def sixteen_page(driver):
-    p16 = driver.find_element_by_xpath(
+    p16 = driver.find_element(By.XPATH,
         "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
         "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
         "/tr[52]/td/table/tbody/tr/td[7]/a"
@@ -288,7 +271,7 @@ def sixteen_page(driver):
 
 
 def seventeen_page(driver):
-    p17 = driver.find_element_by_xpath(
+    p17 = driver.find_element(By.XPATH,
         "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
         "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
         "/tr[52]/td/table/tbody/tr/td[8]/a"
@@ -297,7 +280,7 @@ def seventeen_page(driver):
 
 
 def eighteen_page(driver):
-    p18 = driver.find_element_by_xpath(
+    p18 = driver.find_element(By.XPATH,
         "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
         "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
         "/tr[52]/td/table/tbody/tr/td[9]/a"
@@ -306,7 +289,7 @@ def eighteen_page(driver):
 
 
 def ninteen_page(driver):
-    p19 = driver.find_element_by_xpath(
+    p19 = driver.find_element(By.XPATH,
         "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
         "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
         "/tr[52]/td/table/tbody/tr/td[10]/a"
@@ -315,7 +298,7 @@ def ninteen_page(driver):
 
 
 def twenty_page(driver):
-    p20 = driver.find_element_by_xpath(
+    p20 = driver.find_element(By.XPATH,
         "/html/body/form/div[4]/table/tbody/tr[4]/td/div[2]/div/table"
         "/tbody/tr/td/table[2]/tbody/tr/td/div[3]/div[1]/table/tbody"
         "/tr[52]/td/table/tbody/tr/td[11]/a"
