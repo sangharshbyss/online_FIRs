@@ -30,14 +30,15 @@ if not download_directory:
 main_url = r'https://citizen.mahapolice.gov.in/Citizen/MH/PublishedFIRs.aspx'
 
 # list of districts
-ALL_Districts = ['AMRAVATI RURAL', 'AURANGABAD CITY',
-                 'AURANGABAD RURAL', 'BEED', 'BHANDARA', 'BRIHAN MUMBAI CITY', 'BULDHANA',
-                 'CHANDRAPUR', 'DHULE', 'GADCHIROLI', 'GONDIA', 'HINGOLI', 'JALGAON', 'JALNA',
-                 'KOLHAPUR', 'LATUR', 'NAGPUR CITY', 'NAGPUR RURAL', 'NANDED', 'NANDURBAR',
-                 'NASHIK CITY', 'NASHIK RURAL', 'NAVI MUMBAI', 'OSMANABAD', 'PALGHAR', 'PARBHANI',
-                 'PIMPRI-CHINCHWAD', 'PUNE CITY', 'PUNE RURAL', 'RAIGAD', 'RAILWAY AURANGABAD',
-                 'RAILWAY MUMBAI', 'RAILWAY NAGPUR', 'RAILWAY PUNE', 'RATNAGIRI', 'SANGLI', 'SATARA',
-                 'SINDHUDURG', 'SOLAPUR CITY', 'SOLAPUR RURAL', 'THANE CITY', 'THANE RURAL', 'WARDHA',
+ALL_Districts = ['AMRAVATI RURAL', 'AURANGABAD CITY', 'AURANGABAD RURAL', 'BEED',
+                 'BHANDARA', 'BRIHAN MUMBAI CITY', 'BULDHANA', 'CHANDRAPUR', 'DHULE',
+                 'GADCHIROLI', 'GONDIA', 'HINGOLI', 'JALGAON', 'JALNA', 'KOLHAPUR',
+                 'LATUR', 'Mira-Bhayandar, Vasai-Virar Police Commissioner','NAGPUR CITY',
+                 'NAGPUR RURAL', 'NANDED', 'NANDURBAR', 'NASHIK CITY', 'NASHIK RURAL',
+                 'NAVI MUMBAI', 'OSMANABAD', 'PALGHAR', 'PARBHANI', 'PIMPRI-CHINCHWAD',
+                 'PUNE CITY', 'PUNE RURAL', 'RAIGAD', 'RAILWAY AURANGABAD', 'RAILWAY MUMBAI',
+                 'RAILWAY NAGPUR', 'RAILWAY PUNE', 'RATNAGIRI', 'SANGLI', 'SATARA', 'SINDHUDURG',
+                 'SOLAPUR CITY', 'SOLAPUR RURAL', 'THANE CITY', 'THANE RURAL', 'WARDHA',
                  'WASHIM', 'YAVATMAL']
 
 
@@ -415,6 +416,7 @@ for name in ALL_Districts:
         FIR_modules.next_page(driver)
     else:
         driver.quit()
+        print(f'{name} finished')
         continue
     time.sleep(3)
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
@@ -435,6 +437,7 @@ for name in ALL_Districts:
         FIR_modules.sixteen_page(driver)
     else:
         driver.quit()
+        print(f'{name} finished')
         continue
     time.sleep(3)
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
@@ -455,6 +458,7 @@ for name in ALL_Districts:
         FIR_modules.seventeen_page(driver)
     else:
         driver.quit()
+        print(f'{name} finished')
         continue
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
                                           poa_dir_police,
@@ -474,6 +478,7 @@ for name in ALL_Districts:
         FIR_modules.eighteen_page(driver)
     else:
         driver.quit()
+        print(f'{name} finished')
         continue
     time.sleep(3)
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
@@ -494,6 +499,7 @@ for name in ALL_Districts:
         FIR_modules.ninteen_page(driver)
     else:
         driver.quit()
+        print(f'{name} finished')
         continue
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
                                           poa_dir_police,
@@ -515,6 +521,7 @@ for name in ALL_Districts:
 
     else:
         driver.quit()
+        print(f'{name} finished')
         continue
     poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
                                           poa_dir_police,
@@ -525,6 +532,7 @@ for name in ALL_Districts:
     if not poa_cases:
         print('no poa')
         driver.quit()
+        print(f'{name} finished')
         continue
 
     else:
