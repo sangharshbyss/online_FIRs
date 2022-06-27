@@ -43,6 +43,7 @@ ALL_Districts = ['AHMEDNAGAR', 'AKOLA', 'AMRAVATI CITY', 'AMRAVATI RURAL', 'AURA
 
 
 # print(list(enumerate(ALL_Districts)))
+print(f'{argv[1]}\n')
 
 def open_page():
     """
