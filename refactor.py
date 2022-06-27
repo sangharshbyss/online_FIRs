@@ -61,6 +61,8 @@ poa_dir_date = []
 poa_dir_sec = []
 
 # list for terminal output
+# list for generating separate output to the file.
+# further this list will be converted to dictionary and then to pandas dataFrame.
 dist_name = []
 dist_total = []
 dist_poa = []
@@ -70,15 +72,16 @@ print(f'{argv[1]}\n')
 
 for name in ALL_Districts:
 
+    # variables
+    number_of_cases_on_all_pages = []
+    poa_dictionary = []
     district_dictionary = {"Unit": '', "Police_Station": '',
                            "Number of Records": '', "PoA Cases": '',
                            "Other Cases": ''}
 
-    # profile = webdriver.FirefoxProfile()
     # set profile for saving directly without pop-up ref -
     # https://stackoverflow.com/a/29777967
     options = Options()
-
     options.set_preference("browser.download.panel.shown", False)
     options.set_preference("browser.download.manager.showWhenStarting", False)
     # profile.set_preference("browser.helperApps.neverAsk.openFile","application/pdf")
@@ -107,540 +110,426 @@ for name in ALL_Districts:
 
     driver = webdriver.Firefox(options=options, proxy=proxy)
     open_page()
-    # for terminal output
-    number_of_cases_on_all_pages = []
-    print(f'\n {name} in progress...')
+    # enter the date through terminal argument
     FIR_modules.enter_date(date1=argv[1], date2=argv[2], driver=driver)
-
+    # enter the name of the district. select one from the list
     FIR_modules.district_selection(name, driver=driver)
-
-    # creation of lists. These lists will be converted to dictionary to write to csv
+    # creation of list. These lists will be converted to dictionary to write to csv
     dist_name.append(name)
-    poa_dictionary = []
     # call the value of records to view @ 50
     time.sleep(1)
     FIR_modules.view_record(driver)
     # call search
     FIR_modules.search(driver=driver)
-    time.sleep(2)
     record = FIR_modules.number_of_records(driver=driver)
-    # for terminal output
+    # for terminal output and separate file output
     dist_total.append(record)
-    if record == '':
-        print(f'page not loaded for \n'
-              f'{name} @ {name} \n\n\n')
-
-        driver.quit()
-        break
-    print(f'total records {record}')
 
     if int(record) > 0:
-        print('scanning records...')
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
     else:
         driver.quit()
-        print(f'no records. {name} finished')
+        # this is very rare
+        # no records on page so the PoA cases on page will be 0.
+        # this 0 needs to be added as the list will be converted to dictionary
+        dist_poa.append(0)
         continue
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if not poa_cases:
-        print('no poa')
-
-    else:
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        print(number_of_cases_on_page, number_of_cases_on_all_pages)
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
 
     if int(record) > 50:
-        print('going to page 2')
-        time.sleep(2)
         FIR_modules.second_page(driver)
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
     else:
-        driver.quit()
-        print(f'{name} finished')
+        # append the list of dist PoAs with total sum of number of cases on all pages
+        # for records up to 50 it will be only one record
+        # - that is from 0 to 50, if at all available
         dist_poa.append(sum(number_of_cases_on_all_pages))
+        driver.quit()
         continue
-    time.sleep(3)
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-
-    if not poa_cases:
-        print('no poa.')
-
-    else:
-        print("PoA")
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        print(number_of_cases_on_page, number_of_cases_on_all_pages)
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
 
     if int(record) > 100:
-        print('going to page 3')
-        time.sleep(2)
         FIR_modules.third_page(driver)
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
+
     else:
         driver.quit()
-        print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-    time.sleep(3)
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if not poa_cases:
-        print('no poa')
-    else:
-        print("PoA")
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
 
     if int(record) > 150:
-        print('going to page 4')
-        time.sleep(2)
         FIR_modules.forth_page(driver)
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
     else:
         driver.quit()
-        print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-    time.sleep(3)
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if not poa_cases:
-        print('no poa')
 
-    else:
-        print("PoA")
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
     if int(record) > 200:
-        print('going to page 5')
-        time.sleep(2)
         FIR_modules.fifth_page(driver)
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
     else:
         driver.quit()
-        print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-    time.sleep(3)
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if not poa_cases:
-        print('no poa')
-    else:
-        print("PoA")
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        print(number_of_cases_on_page, number_of_cases_on_all_pages)
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
+
     if int(record) > 250:
-        print('going to page 6')
-        time.sleep(2)
         FIR_modules.sixth_page(driver)
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
     else:
         driver.quit()
-        print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-    time.sleep(3)
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if not poa_cases:
-        print('no poa')
-    else:
-        print("PoA")
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
+
     if int(record) > 300:
-        print('going to page 7')
-        time.sleep(2)
         FIR_modules.seventh_page(driver)
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
     else:
         driver.quit()
-        print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
 
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if not poa_cases:
-        print('no poa')
-    else:
-        print("PoA")
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
     if int(record) > 350:
-        print('going to page 8')
-        time.sleep(2)
         FIR_modules.eightth_page(driver)
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
     else:
         driver.quit()
-        print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if poa_cases:
-        print("PoA")
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
-
-    else:
-        print('no poa')
 
     if int(record) > 400:
-        print('going to page 9')
-        time.sleep(2)
         FIR_modules.ninenth_page(driver)
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
     else:
         driver.quit()
-        print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-    time.sleep(3)
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if poa_cases:
-        print("PoA")
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
-    else:
-        print('no poa')
+
     if int(record) > 450:
-        print('going to page 10')
-        time.sleep(2)
         FIR_modules.tenth_page(driver)
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
     else:
         driver.quit()
-        print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if poa_cases:
-        print("PoA")
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
-
-    else:
-        print('no poa')
 
     if int(record) > 500:
-        print('going to 11th page')
-        time.sleep(2)
         FIR_modules.next_page(driver)
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
     else:
         driver.quit()
-        print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if not poa_cases:
-        print('no poa')
-
-    else:
-        print("PoA")
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
 
     if int(record) > 550:
-        print('going to 12th page')
-        time.sleep(2)
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
         FIR_modules.twelth_page(driver)
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
     else:
         driver.quit()
-        print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-    time.sleep(3)
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if poa_cases:
-        print("PoA")
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
-    else:
-        print('no poa')
 
     if int(record) > 600:
-        print('going to 13th page')
-        time.sleep(2)
         FIR_modules.thirteen_page(driver)
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
     else:
         driver.quit()
-        print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if poa_cases:
-        print("PoA")
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
-
-    else:
-        print('no poa')
 
     if int(record) > 650:
-        print('going to 14th page')
-        time.sleep(2)
         FIR_modules.fourteen_page(driver)
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
     else:
         driver.quit()
-        print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-    time.sleep(3)
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if poa_cases:
-        print("PoA")
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
-    else:
-        print('no poa')
 
     if int(record) > 700:
-        print('going to 15th page')
-        time.sleep(2)
         FIR_modules.next_page(driver)
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
     else:
         driver.quit()
-        print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-    time.sleep(3)
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if poa_cases:
-        print("PoA")
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
-    else:
-        print('no poa')
 
     if int(record) > 750:
-        print('going to 16th page')
-        time.sleep(2)
         FIR_modules.sixteen_page(driver)
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
     else:
         driver.quit()
-        print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if poa_cases:
-        print("PoA")
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
-    else:
-        print('no poa')
 
     if int(record) > 800:
-        print('going to 17th page')
-        time.sleep(2)
         FIR_modules.seventeen_page(driver)
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
     else:
         driver.quit()
-        print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if poa_cases:
-        print("PoA")
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
-    else:
-        print('no poa')
 
     if int(record) > 850:
-        print('going to 18th page')
-        time.sleep(2)
         FIR_modules.eighteen_page(driver)
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
     else:
         driver.quit()
-        print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-    time.sleep(3)
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if poa_cases:
-        print("PoA")
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
-    else:
-        print('no poa')
 
     if int(record) > 900:
-        print('going to 19th page')
-        time.sleep(2)
         FIR_modules.ninteen_page(driver)
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
     else:
         driver.quit()
-        print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
         continue
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if not poa_cases:
-        print('no poa')
-
-    else:
-        print("PoA")
-        time.sleep(3)
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
 
     if int(record) > 950:
-        print('going to 20th page')
-        time.sleep(2)
         FIR_modules.twenty_page(driver)
-
+        poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
+                                              poa_dir_police,
+                                              poa_dir_year,
+                                              poa_dir_FIR,
+                                              poa_dir_date,
+                                              poa_dir_sec)
+        if not poa_cases:
+            number_of_cases_on_all_pages.append(0)
+        else:
+            number_of_cases_on_page = int(len(poa_cases))
+            number_of_cases_on_all_pages.append(number_of_cases_on_page)
+            FIR_modules.download_repeat(poa_cases, driver,
+                                        )
     else:
         driver.quit()
-        print(f'{name} finished')
         dist_poa.append(sum(number_of_cases_on_all_pages))
-        continue
-    poa_cases = FIR_modules.check_the_act(driver, poa_dir_district,
-                                          poa_dir_police,
-                                          poa_dir_year,
-                                          poa_dir_FIR,
-                                          poa_dir_date,
-                                          poa_dir_sec)
-    if not poa_cases:
-        print('no poa')
-        number_of_cases_on_page = int(len(poa_cases))
-        number_of_cases_on_all_pages.append(number_of_cases_on_page)
-        driver.quit()
-        print(f'{name} finished')
-        continue
-
-    else:
-        print("PoA")
-        FIR_modules.download_repeat(poa_cases, driver,
-                                    )
-        poa_dictionary.append(len(poa_cases))
-    dist_poa.append(sum(number_of_cases_on_all_pages))
-    print(dist_poa)
-    driver.quit()
 
 terminal_dir = {"District": dist_name, "Total": dist_total, "PoA": dist_poa}
 poa_dir = {"District": poa_dir_district, "Police_Station": poa_dir_police,
