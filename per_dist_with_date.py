@@ -645,7 +645,10 @@ poa_dir = {"District": poa_dir_district, "Police_Station": poa_dir_police,
 terminal_df = pd.DataFrame({key: pd.Series(value) for key, value in terminal_dir.items()})
 df = pd.DataFrame(
     {key: pd.Series(value) for key, value in poa_dir.items()})
-print(terminal_df)
 terminal_df.to_csv(os.path.join(base_directory, f'statistical_summary_from_{argv[1]}_to_{argv[2]}.csv'))
 df.to_csv(
     os.path.join(base_directory, "poa_summary", f'{argv[3]}_from_{argv[1]}_to_{argv[2]}.csv'))
+print(f'Highest records in District:'
+      f'\n {terminal_df[terminal_df.Total == terminal_df.Total.max()]}'
+      f'\n Highest number of PoA cases in District:'
+      f'\n {terminal_df[terminal_df.PoA == terminal_df.PoA.max()]}')
